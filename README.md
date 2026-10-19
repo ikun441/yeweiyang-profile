@@ -2,7 +2,7 @@
 
 [中文](#中文说明) · [English](#english)
 
-正式网址：<https://yeweiyang.me/>（备用 IP 入口：<http://47.117.149.126:5173/>） · [部署与更新说明 / Deployment guide](deploy/README.md)
+演示地址：<https://yeweiyang.me/> · [部署与更新说明 / Deployment guide](deploy/README.md)
 
 ## 中文说明
 
@@ -70,6 +70,8 @@ npm run preview
 ## English
 
 Immersive bilingual résumé / portfolio. Three.js WebGL + GSAP + Vite.
+
+Live demo: <https://yeweiyang.me/>
 
 ## Run
 
