@@ -1,11 +1,31 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101411"><meta name="description" content="yeweiyang 的个人作品与简历：金融科技、开源协作、智能记账与数据分析。"><title>yeweiyang — Finance meets technology</title><link rel="icon" href="./favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css"></head><body>
-<a class="skip" href="#projects">跳转至项目 / Skip to projects</a><div class="progress" aria-hidden="true"></div>
-<header><a class="brand" href="#">yw<span>·</span></a><nav aria-label="Main navigation"><a href="#projects" data-i="navProjects"></a><a href="#experience" data-i="navExperience"></a><a href="#about" data-i="navAbout"></a></nav><div class="header-right"><button id="language" aria-label="Switch to English">中 <span>/ EN</span></button><a class="github-top" href="https://github.com/ikun441" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></header>
-<main><section class="hero" id="home"><div class="hero-copy"><div class="eyebrow"><span class="status"></span><span data-i="available"></span></div><h1>Curiosity.<br>Code.<br><em>Real impact.</em></h1><p class="intro" data-i="intro"></p><div class="hero-actions"><a class="button primary" href="#projects"><span data-i="explore"></span> <span>↗</span></a><button class="button text-button" id="print"><span data-i="resume"></span> ↓</button></div><div class="hero-meta"><span>YEWEIYANG</span><span data-i="specialty"></span></div></div><div class="hero-art"><canvas id="orb" aria-hidden="true"></canvas><span class="orbit-label label-one">FINANCE</span><span class="orbit-label label-two">TECHNOLOGY</span><span class="orbit-label label-three">HUMAN CONNECTION</span><div class="art-caption"><span>01 — INTERSECTIONS</span><span data-i="artCaption"></span></div></div><a href="#projects" class="scroll-note"><span>↓</span> SCROLL TO DISCOVER</a><span class="hero-year">PORTFOLIO / 2026</span></section>
-<div class="ticker" aria-hidden="true"><div>FINTECH <span>✳</span> OPEN SOURCE <span>✳</span> DATA & INSIGHTS <span>✳</span> CREATIVE THINKING <span>✳</span> FINTECH <span>✳</span> OPEN SOURCE <span>✳</span> DATA & INSIGHTS <span>✳</span></div></div>
-<section class="section" id="projects"><div class="section-heading reveal"><div><p class="eyebrow">01 / SELECTED WORK</p><h2 data-i="projectsTitle"></h2></div><p data-i="projectsIntro"></p></div><div id="project-grid" class="project-grid"></div><div class="source-note" data-i="sourceNote"></div></section>
-<section class="section experience" id="experience"><div class="section-heading reveal"><div><p class="eyebrow">02 / IN THE REAL WORLD</p><h2 data-i="experienceTitle"></h2></div><p data-i="experienceIntro"></p></div><article class="experience-layout reveal"><div><span class="pill">2026.03 — 2026.06</span><h3 data-i="taxOffice"></h3><p class="muted" data-i="internship"></p><div class="experience-mark" aria-hidden="true">↗</div></div><div><p class="experience-lead" data-i="taxLead"></p><ol class="task-list"><li data-i="task1"></li><li data-i="task2"></li><li data-i="task3"></li><li data-i="task4"></li></ol><div class="tags"><span data-i="system1"></span><span data-i="system2"></span><span data-i="system3"></span></div></div></article></section>
-<section class="section" id="about"><div class="section-heading reveal"><div><p class="eyebrow">03 / A LITTLE MORE ABOUT ME</p><h2 data-i="aboutTitle"></h2></div><p data-i="aboutIntro"></p></div><div class="about-grid"><article class="education reveal"><span class="mini-label" data-i="education"></span><h3 data-i="major"></h3><p data-i="degree"></p><div class="education-bottom"><strong>2024 — 2027</strong><span>CET-4 / CET-6</span></div></article><article class="awards reveal"><span class="mini-label" data-i="awards"></span><div id="awards"></div></article></div><div class="skills-row reveal"><span>Python</span><span>API Integration</span><span>WordPress</span><span>Cloudflare</span><span data-i="skillData"></span><span data-i="skillTax"></span><span data-i="skillCommunity"></span></div></section>
-<section class="contact section reveal"><p class="eyebrow">WHAT’S NEXT?</p><h2 data-i="contactTitle"></h2><div class="contact-bottom"><p data-i="contactText"></p><a class="button primary" href="https://github.com/ikun441" target="_blank" rel="noopener noreferrer"><span data-i="contactButton"></span> ↗</a></div></section></main><footer><a class="brand" href="#">yw<span>·</span></a><span>© 2026 YEWEIYANG</span><span data-i="footer"></span><a href="#" data-i="backTop"></a></footer>
-<dialog id="project-dialog" aria-labelledby="dialog-title"><button class="close-dialog" aria-label="关闭 / Close">✕</button><div id="dialog-content"></div></dialog><script type="module" src="./app.js"></script></body></html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#e9e5ef">
+  <meta name="description" content="yeweiyang 的沉浸式个人作品集：金融科技、开源语音、机器人生态与独立博客。">
+  <title>yeweiyang — Beyond one dimension.</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <a class="skip" href="#projects">跳转项目 / Skip to work</a>
+  <div id="stage" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div id="scene-fallback" aria-hidden="true"><div class="fallback-ring"></div></div>
+  <header class="site-header">
+    <a class="wordmark" href="#home">yeweiyang<span>®</span></a>
+    <nav aria-label="Main navigation"><a href="#projects" data-i="navProjects"></a><a href="#experience" data-i="navExperience"></a><a href="#about" data-i="navAbout"></a></nav>
+    <div class="header-tools"><button id="language" aria-label="Switch language"></button><a class="github-link" href="https://github.com/ikun441" target="_blank" rel="noopener noreferrer">GITHUB ↗</a></div>
+  </header>
+  <main id="main"></main>
+  <button id="scene-control" class="scene-control" aria-label="拖动旋转场景 / Drag to rotate scene"><span></span></button>
+  <aside class="journey-rail" aria-label="Scene navigation"></aside>
+  <div class="scene-hud" aria-hidden="true"><span class="hud-cross">+</span><div><span id="scene-name">THE INTERSECTION</span><span id="scene-number">00 / 04</span></div><span class="hud-cross">+</span></div>
+  <div class="motion-tools"><button id="motion-toggle" aria-pressed="false"></button><span class="live-dot"></span><span id="render-status">WEBGL / INITIALIZING</span></div>
+  <div class="scroll-progress" aria-hidden="true"><div></div></div>
+  <dialog id="project-dialog" aria-labelledby="dialog-title"><button class="close-dialog" aria-label="关闭 / Close">✕</button><div id="dialog-content"></div></dialog>
+  <noscript><p class="noscript">请开启 JavaScript 浏览双语 3D 作品集。项目资料：<a href="https://github.com/ikun441">github.com/ikun441</a>。金融科技应用，大专（2024–2027）；求职方向：IT 服务、财务、数据分析。</p></noscript>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

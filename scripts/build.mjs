@@ -1,4 +1,0 @@
-import {mkdir,copyFile,rm} from 'node:fs/promises';
-await rm('dist',{recursive:true,force:true});await mkdir('dist');
-for(const f of ['index.html','style.css','app.js','favicon.svg'])await copyFile(f,`dist/${f}`);
-console.log('Built static site → dist/');

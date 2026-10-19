@@ -1,28 +1,238 @@
-const text={
-zh:{navProjects:'项目',navExperience:'经历',navAbout:'关于',available:'寻找下一段成长机会 · 2027 届',intro:'你好，我是 yeweiyang。以金融科技为起点，用代码连接真实需求，在开源协作、财税业务与数据中持续探索。',explore:'探索我的项目',resume:'保存简历',specialty:'金融科技 × 技术实践',artCaption:'在不同领域的交汇处，创造价值。',projectsTitle:'让想法，落地有声。',projectsIntro:'从财务场景到开源社区，关注解决问题的完整过程。',sourceNote:'开源项目关联公开仓库与 PR；机器人运营及博客数据由本人提供。画面为概念演示，非实际截图。',experienceTitle:'把专业，带进真实场景。',experienceIntro:'在税务一线理解规则、数据与沟通的价值。',taxOffice:'双流区税务局',internship:'实习经历 / 财税业务',taxLead:'在严谨的业务流程中，建立对财税工作的完整认识。',task1:'参与综合所得税汇算清缴退税初审与复审，处理纳税人异议申诉及沟通协商。',task2:'负责残保金追缴核实、个税经营所得 A / B 表追缴、个体工商户滞纳金追缴。',task3:'完成反向开票审核与批量数据采集核定，使用加油机采集器开展线下数据采集。',task4:'熟练操作金三系统、自然人电子税务局、帆软报表，熟悉税收政策，具备较强业务执行能力。',system1:'金三系统',system2:'自然人电子税务局',system3:'帆软报表',aboutTitle:'保持好奇，持续生长。',aboutIntro:'在意数字背后的逻辑，也在意技术连接的人。',education:'教育 / EDUCATION',major:'金融科技应用',degree:'大专 · 在读（预计 2027 年毕业）',awards:'认可 / RECOGNITION',skillData:'数据分析',skillTax:'财税业务',skillCommunity:'社区运营',contactTitle:'下一个交汇点，<br>期待与你<em>一起创造。</em>',contactText:'求职方向：IT 服务 / 财务 / 数据分析。期待将技术探索与金融科技所学带入真实业务。',contactButton:'在 GitHub 找到我',footer:'在技术与业务之间，持续探索。',backTop:'回到顶部 ↑',context:'项目背景',practice:'我的实践',outcome:'成果与收获',link:'查看项目 ↗',awardList:[['川渝图书馆杯中英口语技能大赛','省赛 · 优秀奖'],['四川省企业大数据分析与应用大赛','省赛 · 三等奖 / 金蝶联合高校举办'],['金青藤文学奖','校赛 · 三等奖']]},
-en:{navProjects:'Projects',navExperience:'Experience',navAbout:'About',available:'OPEN TO OPPORTUNITIES · CLASS OF 2027',intro:'Hi, I’m yeweiyang. Rooted in financial technology, I connect code with real needs through open source, tax operations, and data.',explore:'Explore my work',resume:'Save résumé',specialty:'FINTECH × HANDS-ON TECHNOLOGY',artCaption:'Finding value where disciplines meet.',projectsTitle:'Ideas, put into practice.',projectsIntro:'From financial workflows to open-source communities: learning by building solutions to real problems.',sourceNote:'Open-source work links to public repositories and PRs. Bot and blog metrics are self-reported. Visuals are conceptual, not product screenshots.',experienceTitle:'Learning in the real world.',experienceIntro:'Tax operations, where policy, data, and communication come together.',taxOffice:'Shuangliu District Tax Bureau',internship:'Internship / Tax operations',taxLead:'Building practical understanding through careful, structured tax workflows.',task1:'Supported initial and secondary reviews of annual comprehensive income tax refunds; handled taxpayer objections and communication.',task2:'Verified disability employment fund recoveries, business income tax recoveries (Forms A/B), and late-payment charges for sole proprietors.',task3:'Reviewed reverse invoicing and verified batch data collection; collected on-site data using fuel dispenser collection devices.',task4:'Used Golden Tax III, the Natural Person E-Tax platform, and FineReport; developed familiarity with tax policy and operational execution.',system1:'Golden Tax III',system2:'Natural Person E-Tax',system3:'FineReport',aboutTitle:'Stay curious. Keep growing.',aboutIntro:'Interested in the logic behind numbers, and the people connected by technology.',education:'EDUCATION',major:'Financial Technology Applications',degree:'Associate degree · Expected graduation in 2027',awards:'RECOGNITION',skillData:'Data analysis',skillTax:'Tax operations',skillCommunity:'Community operations',contactTitle:'At the next intersection,<br>let’s <em>build together.</em>',contactText:'Seeking opportunities in IT services, finance, and data analysis. Bringing technical curiosity and fintech learning to real business needs.',contactButton:'Find me on GitHub',footer:'Exploring the space between technology and business.',backTop:'Back to top ↑',context:'THE CONTEXT',practice:'MY CONTRIBUTION',outcome:'OUTCOME & LEARNING',link:'View project ↗',awardList:[['Sichuan–Chongqing Library Cup Chinese & English Speaking Skills Competition','Provincial · Excellence Award'],['Sichuan Enterprise Big Data Analysis & Application Competition','Provincial · Third Prize / Kingdee & partner colleges'],['Golden Ivy Literature Award','College · Third Prize']]}}
-const projects=[
-{id:'firefly',category:'FINTECH / GRADUATION PROJECT',tags:['Python','FastAPI','NoneBot','AI'],url:'https://github.com/ikun441/firefly_bot',zh:['流萤 · 智能记账助手','让财税知识与代码相遇，探索更自然的记账与分析方式。','面向中小企业的智能记账与财税分析助手，也是金融科技应用专业的毕业作品。',['使用原生 HTML / CSS / JavaScript 与 FastAPI / NoneBot，提供网页与 QQ 双入口。','通过自然语言解析与人工确认、Excel 导入，串联流水管理、预算与周期报告。','AI 助手通过白名单只读查询；记账草稿需确认，并隔离用户与会话。'],'公开仓库提供运行方式、API 文档与回归验证记录。以可运行工具连接财务业务与技术实践，持续迭代中。'],en:['Firefly · Intelligent bookkeeping','Bringing finance and code together for more natural bookkeeping and financial insights.','A bookkeeping assistant for small businesses, developed as a fintech graduation project.',['Built web and QQ entry points with HTML/CSS/JavaScript, FastAPI, and NoneBot.','Connected natural-language parsing and explicit confirmation with Excel imports, transactions, budgets, and reports.','Used allowlisted read-only AI queries, draft confirmation, and user/session isolation.'],'The public repository documents setup, APIs, and regression checks. An ongoing exploration of financial workflows through working software.']},
-{id:'tts',category:'OPEN SOURCE / MERGED CONTRIBUTION',tags:['Python','TTS','API','Open source'],url:'https://github.com/xinnan-tech/xiaozhi-esp32-server/pull/200',zh:['小智 · ACGNTTS 语音接入','从维护者文档到上游合并，为开源语音服务新增合成路径。','依据 AcgnTTS 维护者提供的开发文档，为 xiaozhi-esp32-server 接入新版语音合成方法。',['独立实现 ACGNTTS.py，并提交上游 Pull Request #200。','通过 PR #201 补充配置，遵循项目的服务接入规范。','参与上游协作，熟悉代码评审、贡献流程与文档驱动开发。'],'PR #200 与 #201 均于 2025 年 3 月 7 日合并，为项目新增可用的语音合成接入路径。'],en:['Xiaozhi · ACGNTTS integration','From maintainer documentation to merged code: a new open-source speech synthesis integration.','Integrated AcgnTTS into xiaozhi-esp32-server using maintainer development documentation.',['Independently implemented ACGNTTS.py and submitted upstream PR #200.','Added provider configuration through PR #201.','Practiced documentation-driven development, code review, and upstream collaboration.'],'PR #200 and #201 were merged on March 7, 2025, adding an available TTS integration path.']},
-{id:'bots',category:'ECOSYSTEM / COMMUNITY OPERATIONS',tags:['NapCat','zhenxun_bot','NoneBot2','Yunzai'],url:'https://github.com/ikun441',zh:['机器人生态 · 连接与运营','一个协议端，三个框架，百余项落地功能。让技术服务于社区。','基于 NapCat 协议端，同时连接多个机器人框架，满足社区实际需求。',['接入 zhenxun_bot、nonebot2、yunzai 三方框架，组合不同生态能力。','累计落地运营百余个功能，处理接入、配置与日常使用问题。','开展社区维护，在用户反馈与技术实现之间建立沟通。'],'积累多框架接入、功能运营与社区协作经验。数量由本人提供；未提供独立公开仓库，链接指向个人 GitHub。'],en:['Bot ecosystem · Connect & operate','One protocol endpoint, three frameworks, and over a hundred deployed features.','Connected multiple bot frameworks through NapCat to serve community needs.',['Integrated zhenxun_bot, nonebot2, and yunzai.','Deployed and operated over 100 features, handling integration, configuration, and support.','Maintained the community and connected feedback with technical changes.'],'Experience in multi-framework integration, feature operations, and community support. Feature count is self-reported; the link opens my GitHub profile because no public repository was supplied.']},
-{id:'blog',category:'WEB / INDEPENDENT SITE OPERATIONS',tags:['WordPress','Sakurairo','Cloudflare','ICP'],url:'https://github.com/ikun441',zh:['个人博客 · 从搭建到增长','独立完成建站、ICP备案与运营，在内容和技术之间建立自己的空间。','基于 WordPress 的 Sakurairo 主题搭建个人博客，独立推进从部署到运营的流程。',['独立完成 ICP 备案全流程，配置第三方插件完善站点功能。','通过宝塔面板与 Cloudflare 配置智能拦截与回源策略。','持续运营内容与社区，关注真实用户和访问反馈。'],'一年内约新增 50 名用户、5k 浏览量、2k 真实访问用户（本人提供）。未提供博客网址，链接指向个人 GitHub。'],en:['Personal blog · Build to grow','From WordPress setup and ICP filing to everyday site operations.','Built a personal blog with the Sakurairo theme, independently handling setup and operations.',['Completed ICP filing and enhanced the site with third-party plugins.','Configured traffic filtering and origin routing with BT Panel and Cloudflare.','Operated content and the community with attention to user feedback.'],'Approximately 50 new users, 5k page views, and 2k unique visitors in one year (self-reported). No blog URL was supplied; the link opens my GitHub profile.']}];
-let lang='zh';try{lang=localStorage.getItem('yw-lang')==='en'?'en':'zh'}catch{}
-const reduced=matchMedia('(prefers-reduced-motion: reduce)'),dialog=document.querySelector('dialog');
-const visuals={
-firefly:()=>'<div class="mini-app"><div class="mini-top"><b>✳ FIREFLY</b><span>OVERVIEW ↗</span></div><div class="mini-stats"><div><small>INCOME</small><b>12,860.00</b></div><div><small>EXPENSES</small><b>4,280.00</b></div></div><div class="mini-chart">'+[35,60,43,80,55,95,68,78,48,90,65,100].map(h=>'<i style="height:'+h+'%"></i>').join('')+'</div></div><span class="mock-note">CONCEPT DEMO / SAMPLE DATA</span>',
-tts:()=>'<span class="visual-word">TEXT → VOICE → CONNECTION</span><div class="wave">'+Array.from({length:43},(_,i)=>'<i style="--h:'+(20+Math.sin(i*.72)**2*96)+'px;--d:'+i*-.09+'s"></i>').join('')+'</div><span class="visual-bottom">ACGNTTS / xiaozhi-esp32-server</span><span class="merge">⑂ MERGED #200</span>',
-bots:()=>'<div class="network"><span class="node core">NapCat</span><span class="node n1">NoneBot2</span><span class="node n2">zhenxun_bot</span><span class="node n3">Yunzai</span></div><span class="network-count">100+<small>FEATURES</small></span>',
-blog:()=>'<div class="blog-window"><div class="browser-dots">···</div><div class="blog-landscape"><span>A place to grow.</span></div><div class="blog-lines"><b>Notes on life & technology.</b><i></i><i></i></div></div><span class="mock-note">CONCEPT DEMO / WORDPRESS</span>'};
-function showProject(id){const p=projects.find(p=>p.id===id),t=p[lang],c=text[lang];document.querySelector('#dialog-content').innerHTML='<p class="eyebrow">'+p.category+'</p><h2 id="dialog-title">'+t[0]+'</h2><div class="tags">'+p.tags.map(t=>'<span>'+t+'</span>').join('')+'</div><h3>'+c.context+'</h3><p>'+t[2]+'</p><h3>'+c.practice+'</h3><ul>'+t[3].map(t=>'<li>'+t+'</li>').join('')+'</ul><h3>'+c.outcome+'</h3><p>'+t[4]+'</p><a class="button primary" href="'+p.url+'" target="_blank" rel="noopener noreferrer">'+c.link+'</a>'+(id==='tts'?'<p><a href="https://github.com/xinnan-tech/xiaozhi-esp32-server/pull/201" target="_blank" rel="noopener noreferrer">Configuration PR #201 ↗</a></p>':'');dialog.showModal()}
-const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.08});
-function render(){const c=text[lang];document.documentElement.lang=lang==='zh'?'zh-CN':'en';document.title=lang==='zh'?'yeweiyang — 金融科技 × 技术实践':'yeweiyang — Finance meets technology';document.querySelectorAll('[data-i]').forEach(e=>e.innerHTML=c[e.dataset.i]);const b=document.querySelector('#language');b.innerHTML=lang==='zh'?'中 <span>/ EN</span>':'EN <span>/ 中</span>';b.setAttribute('aria-label',lang==='zh'?'Switch to English':'切换为中文');document.querySelector('#project-grid').innerHTML=projects.map((p,i)=>'<article class="project reveal"><div class="project-visual '+p.id+'" aria-hidden="true">'+visuals[p.id]()+'</div><div class="project-info"><div class="project-topline"><span>'+p.category+'</span><span>0'+(i+1)+'</span></div><div class="project-title-row"><h3>'+p[lang][0]+'</h3><button class="project-open" data-project="'+p.id+'" aria-label="'+(lang==='zh'?'查看详情：':'View details: ')+p[lang][0]+'">↗</button></div><p>'+p[lang][1]+'</p><div class="tags">'+p.tags.map(t=>'<span>'+t+'</span>').join('')+'</div></div></article>').join('');document.querySelector('#awards').innerHTML=c.awardList.map(a=>'<div class="award"><span>✳</span><div><p>'+a[0]+'</p><small>'+a[1]+'</small></div></div>').join('');document.querySelectorAll('.reveal').forEach(e=>{e.classList.add('ready');observer.observe(e)});if(matchMedia('(hover:hover)').matches)document.querySelectorAll('.project-visual').forEach(el=>{el.addEventListener('pointermove',e=>{if(reduced.matches)return;const r=el.getBoundingClientRect();el.style.transform='rotateX('+(-(e.clientY-r.top-r.height/2)/35)+'deg) rotateY('+((e.clientX-r.left-r.width/2)/35)+'deg)'});el.addEventListener('pointerleave',()=>el.style.transform='')})}
-document.querySelector('#language').onclick=()=>{lang=lang==='zh'?'en':'zh';try{localStorage.setItem('yw-lang',lang)}catch{}render()};
-document.querySelector('#print').onclick=()=>print();document.querySelector('#project-grid').onclick=e=>{const b=e.target.closest('[data-project]');if(b)showProject(b.dataset.project)};
-document.querySelector('.close-dialog').onclick=()=>dialog.close();dialog.addEventListener('click',e=>{const r=dialog.getBoundingClientRect();if(e.target===dialog&&(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom))dialog.close()});render();
-// Perspective-projected toroidal point cloud, depth sorted; no external rendering dependency.
-const canvas=document.querySelector('#orb'),ctx=canvas.getContext('2d');let w=500,h=530,frame=0,inView=true,mx=0,my=0,raf=null;
-function resize(){const r=canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);w=r.width;h=r.height;canvas.width=w*d;canvas.height=h*d;ctx?.setTransform(d,0,0,d,0,0)}
-function draw(){if(!ctx)return;ctx.clearRect(0,0,w,h);const t=reduced.matches?.6:frame*.003,a=.65+my*.25,r=t+mx*.3,s=Math.min(w,h)*.29,points=[];for(let i=0;i<100;i++){let u=i/100*Math.PI*2;for(let j=0;j<30;j++){let v=j/30*Math.PI*2,x=(1+.36*Math.cos(v))*Math.cos(u),y=(1+.36*Math.cos(v))*Math.sin(u),z=.36*Math.sin(v),x1=x*Math.cos(r)-z*Math.sin(r),z1=x*Math.sin(r)+z*Math.cos(r),y1=y*Math.cos(a)-z1*Math.sin(a),z2=y*Math.sin(a)+z1*Math.cos(a),x2=x1*Math.cos(-.5)-y1*Math.sin(-.5),y2=x1*Math.sin(-.5)+y1*Math.cos(-.5),p=3.8/(3.8-z2);points.push([w/2+x2*s*p,h*.48+y2*s*p,z2,j])}}points.sort((a,b)=>a[2]-b[2]);for(const[x,y,z,j]of points){ctx.beginPath();ctx.fillStyle='rgba('+(j%4===0?'232,241,204':'164,197,131')+','+(.15+(z+1.4)/2.8*.75)+')';ctx.arc(x,y,(.5+(z+1.4)*.37)*Math.min(w/450,1.2),0,Math.PI*2);ctx.fill()}frame++}
-function loop(){raf=null;if(document.hidden||!inView||reduced.matches)return;draw();raf=requestAnimationFrame(loop)}function resume(){if(!raf&&!reduced.matches&&inView&&!document.hidden)loop();else if(reduced.matches)draw()}
-new ResizeObserver(()=>{resize();if(reduced.matches)draw()}).observe(canvas);new IntersectionObserver(([e])=>{inView=e.isIntersecting;resume()}).observe(canvas);document.addEventListener('visibilitychange',resume);reduced.addEventListener('change',resume);canvas.parentElement.addEventListener('pointermove',e=>{const r=canvas.getBoundingClientRect();mx=(e.clientX-r.left)/w-.5;my=(e.clientY-r.top)/h-.5});canvas.parentElement.addEventListener('pointerleave',()=>{mx=0;my=0});resize();draw();resume();
-let pending=false;addEventListener('scroll',()=>{if(pending)return;pending=true;requestAnimationFrame(()=>{const total=document.documentElement.scrollHeight-innerHeight;document.querySelector('.progress').style.width=(total>0?scrollY/total*100:0)+'%';pending=false})},{passive:true});
+import './style.css';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { text, projects } from './content.js';
+import { createJourney } from './scene.js';
+
+gsap.registerPlugin(ScrollTrigger);
+const $ = selector => document.querySelector(selector);
+const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
+let lang = 'zh';
+try { lang = localStorage.getItem('yw-lang') === 'en' ? 'en' : 'zh'; } catch {}
+let paused = motionPreference.matches;
+let journey, animationContext, activeProject = null, modalOpener;
+const dialog = $('#project-dialog');
+const sectionCopy = {
+  zh: {
+    available: '金融科技探索者 / 2027 届',
+    headline: '<span class="line"><span>不止于</span></span><span class="line"><span>一个</span></span><span class="line"><span><em>维度。</em></span></span>',
+    intro: '我是 <strong>yeweiyang</strong>。以金融科技为起点，在代码、财税与开源社区之间，探索更多可能。',
+    enter: '进入我的项目空间', scroll: '向下滚动，穿行于不同维度', art: '逻辑 · 好奇心 · 创造力',
+    work: '四个项目，四种探索。',
+    workIntro: '沿着一条空间路径，看见技术如何连接真实的业务与人。',
+    chapters: ['流萤，<br><em>数有所依。</em>', '让文字，<br><em>有了声音。</em>', '连接，<br><em>不止一种。</em>', '留一处，<br><em>自由生长。</em>'],
+    detail: '走进这个项目', pause: '暂停动态', play: '开启动态', interact: '触动空间',
+    proofs: ['金融科技毕业作品 · 持续迭代', '上游 PR #200 / #201 已合并', '三方框架接入 · 社区持续运营', '独立建站 · ICP 备案 · 内容运营'],
+    metrics: ['新增用户', '浏览量', '真实访客'],
+    contact: '让下一次相遇，<br>发生点<em>新东西。</em>',
+    next: '下一个项目', previous: '上一个项目', source: '源码 / 贡献记录', close: '关闭项目详情',
+  },
+  en: {
+    available: 'FINTECH EXPLORER / CLASS OF 2027',
+    headline: '<span class="line"><span>Beyond</span></span><span class="line"><span>one</span></span><span class="line"><span><em>dimension.</em></span></span>',
+    intro: 'I’m <strong>yeweiyang</strong>. Exploring the possibilities between financial technology, code, and open-source communities.',
+    enter: 'Step into my work', scroll: 'SCROLL TO EXPLORE THE DIMENSIONS', art: 'LOGIC · CURIOSITY · CREATIVITY',
+    work: 'Four projects. New perspectives.',
+    workIntro: 'Follow a spatial journey through technology, real business needs, and human connections.',
+    chapters: ['Finance,<br><em>made fluid.</em>', 'Give words<br><em>a voice.</em>', 'Connected<br><em>by curiosity.</em>', 'A place<br><em>to grow.</em>'],
+    detail: 'Inside the project', pause: 'PAUSE MOTION', play: 'ENABLE MOTION', interact: 'ACTIVATE SPACE',
+    proofs: ['FINTECH GRADUATION PROJECT / IN DEVELOPMENT', 'UPSTREAM PR #200 / #201 MERGED', 'THREE FRAMEWORKS / COMMUNITY OPERATIONS', 'INDEPENDENT SITE / ICP FILING / CONTENT'],
+    metrics: ['NEW USERS', 'PAGE VIEWS', 'UNIQUE VISITORS'],
+    contact: 'Let’s make the next<br>intersection <em>matter.</em>',
+    next: 'Next project', previous: 'Previous project', source: 'SOURCE / CONTRIBUTION', close: 'Close project details',
+  },
+};
+
+function renderPage() {
+  const c = text[lang], s = sectionCopy[lang];
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  document.title = 'yeweiyang — ' + (lang === 'zh' ? '不止于一个维度。' : 'Beyond one dimension.');
+  $('#language').innerHTML = lang === 'zh' ? '中 <span>/ EN</span>' : 'EN <span>/ 中</span>';
+  $('#language').setAttribute('aria-label', lang === 'zh' ? 'Switch to English' : '切换为中文');
+  document.querySelectorAll('[data-i]').forEach(el => el.textContent = c[el.dataset.i]);
+  $('#main').innerHTML = `
+    <section id="home" class="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <p class="eyebrow hero-kicker"><span class="availability-dot"></span>${s.available}</p>
+        <h1 id="hero-title">${s.headline}</h1>
+        <p class="hero-intro">${s.intro}</p>
+        <div class="hero-actions"><a class="round-link" href="#projects"><span class="arrow">↘</span><span>${s.enter}</span></a><button class="text-link" id="print">${c.resume} ↓</button></div>
+      </div>
+      <div class="hero-index" aria-hidden="true">FIG. 00 — THE INTERSECTION</div>
+      <div class="hero-bottom"><a class="scroll-cue" href="#projects"><span class="scroll-line"></span>${s.scroll}</a><div>INDEPENDENT MIND.<br>${s.art}</div></div>
+    </section>
+    <section class="work-intro" id="projects"><p class="eyebrow">01 — 04 / SELECTED EXPLORATIONS</p><h2>${s.work}</h2><p>${s.workIntro}</p></section>
+    <div class="project-journey">
+      ${projects.map((p, i) => `
+        <section class="chapter" id="${p.id}" data-scene="${i + 1}" aria-labelledby="title-${p.id}">
+          <div class="chapter-inner"><div class="chapter-copy">
+            <span class="chapter-num" aria-hidden="true">0${i + 1}</span>
+            <p class="eyebrow">${p.category}</p>
+            <h2 id="title-${p.id}">${s.chapters[i]}</h2>
+            <p class="chapter-summary"><strong>${p[lang][0]}</strong><br>${p[lang][1]}</p>
+            <div class="tags">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
+            ${p.id === 'blog' ? `<div class="project-stats">${['~50', '~5k', '~2k'].map((n, j) => `<div><b>${n}</b><small>${s.metrics[j]}</small></div>`).join('')}</div>` : ''}
+            <button class="round-link project-open" data-project="${p.id}" aria-label="${s.detail}: ${p[lang][0]}"><span class="arrow">↗</span><span>${s.detail}</span></button>
+            <p class="project-proof">${s.proofs[i]}</p>
+          </div></div>
+          <span class="scene-tag" aria-hidden="true">0${i + 1} / ${['FINANCIAL FLOW', 'RESONANCE', 'CONNECTED', 'UNFOLD'][i]}</span>
+        </section>`).join('')}
+    </div>
+    <p class="source-note">${c.sourceNote}</p>
+    <section class="paper-section experience-section" id="experience">
+      <div class="section-heading reveal"><div><p class="eyebrow">05 / IN THE REAL WORLD</p><h2>${c.experienceTitle}</h2></div><p>${c.experienceIntro}</p></div>
+      <article class="experience-layout reveal"><div><span class="date">2026.03 — 2026.06</span><h3>${c.taxOffice}</h3><p class="muted">${c.internship}</p><div class="experience-symbol" aria-hidden="true">↗</div></div>
+        <div><p class="experience-lead">${c.taxLead}</p><ol class="task-list">${[1, 2, 3, 4].map(i => `<li>${c['task' + i]}</li>`).join('')}</ol><div class="tags"><span>${c.system1}</span><span>${c.system2}</span><span>${c.system3}</span></div></div>
+      </article>
+    </section>
+    <section class="paper-section about-section" id="about">
+      <div class="section-heading reveal"><div><p class="eyebrow">06 / ALWAYS IN PROGRESS</p><h2>${c.aboutTitle}</h2></div><p>${c.aboutIntro}</p></div>
+      <div class="about-grid reveal"><article class="education"><p class="eyebrow">${c.education}</p><h3>${c.major}</h3><p class="muted">${c.degree}</p><div class="education-bottom"><b>2024 — 2027</b><span>CET-4 / CET-6</span></div></article>
+        <article class="awards" aria-label="${c.awards}">${c.awardList.map(([name, prize]) => `<div class="award"><span aria-hidden="true">✳</span><div><p>${name}</p><small>${prize}</small></div></div>`).join('')}</article>
+      </div>
+      <div class="skills reveal">${['Python', 'API Integration', 'WordPress', 'Cloudflare', c.skillData, c.skillTax, c.skillCommunity].map(t => `<span>${t}</span>`).join('')}</div>
+    </section>
+    <section class="contact"><p class="eyebrow">07 / AN OPEN INVITATION</p><h2 class="reveal">${s.contact}</h2><div class="contact-bottom"><p>${c.contactText}</p><a class="round-link" href="https://github.com/ikun441" target="_blank" rel="noopener noreferrer"><span class="arrow">↗</span><span>${c.contactButton}</span></a></div></section>
+    <footer><a class="wordmark" href="#home">yeweiyang<span>®</span></a><span>© 2026 / PERSONAL EXPLORATIONS</span><a href="#home">${c.backTop}</a></footer>
+  `;
+  $('#scene-control span').textContent = lang === 'zh' ? '拖动旋转 / 点击触动' : 'DRAG TO ROTATE / CLICK TO PLAY';
+  $('#scene-control').setAttribute('aria-label', lang === 'zh' ? '拖动旋转场景，方向键旋转，回车触动' : 'Drag to rotate scene. Use arrow keys to rotate, Enter to activate.');
+  $('.journey-rail').innerHTML = ['home', ...projects.map(p => p.id)].map((id, i) => `<a href="#${id}" aria-label="${i === 0 ? (lang === 'zh' ? '首页' : 'Home') : projects[i - 1][lang][0]}" ${i === 0 ? 'aria-current="step"' : ''}><span class="rail-label">${i === 0 ? '00 / HOME' : '0' + i + ' / ' + projects[i - 1].id.toUpperCase()}</span></a>`).join('');
+  $('#print').onclick = () => print();
+  updateMotionButton();
+}
+
+function animatePage() {
+  animationContext?.revert();
+  if (paused) return;
+  animationContext = gsap.context(() => {
+    gsap.from('.hero .line > span', { yPercent: 115, rotate: 4, duration: 1.35, stagger: .11, ease: 'power4.out', delay: .12 });
+    gsap.from('.hero-kicker,.hero-intro,.hero-actions', { opacity: 0, y: 20, duration: 1, stagger: .13, delay: .5, ease: 'power3.out' });
+    gsap.to('.hero-content', { y: -90, opacity: .15, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 10%', scrub: true } });
+    document.querySelectorAll('.chapter-copy').forEach(el => {
+      gsap.from(el, { opacity: 0, y: 65, rotateX: -8, transformPerspective: 1000, duration: 1.2, ease: 'power3.out',
+        scrollTrigger: { trigger: el.closest('.chapter'), start: 'top 60%', toggleActions: 'play none none reverse' } });
+    });
+    document.querySelectorAll('.reveal').forEach(el => {
+      gsap.from(el, { opacity: 0, y: 35, duration: .9, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 93%', toggleActions: 'play none none reverse' } });
+    });
+  });
+}
+
+function updateMotionButton() {
+  const button = $('#motion-toggle');
+  button.textContent = paused ? sectionCopy[lang].play : sectionCopy[lang].pause;
+  button.setAttribute('aria-pressed', String(paused));
+  document.body.classList.toggle('motion-paused', paused);
+}
+function setPaused(value) {
+  paused = value; updateMotionButton(); journey?.setPaused(value); animatePage(); ScrollTrigger.refresh();
+}
+function showProject(id, opening = true) {
+  const p = projects.find(p => p.id === id), t = p[lang], c = text[lang], s = sectionCopy[lang];
+  activeProject = id;
+  const index = projects.indexOf(p);
+  $('#dialog-content').innerHTML = `
+    <p class="eyebrow">${p.category}</p><h2 id="dialog-title">${t[0]}</h2>
+    <p class="dialog-proof">${s.proofs[index]}</p>
+    <div class="tags">${p.tags.map(tag => `<span>${tag}</span>`).join('')}</div>
+    <h3>${c.context}</h3><p>${t[2]}</p><h3>${c.practice}</h3>
+    <ul>${t[3].map(step => `<li>${step}</li>`).join('')}</ul>
+    <h3>${c.outcome}</h3><p>${t[4]}</p>
+    <a class="dialog-link" href="${p.url}" target="_blank" rel="noopener noreferrer">${c.link}</a>
+    ${id === 'tts' ? '<p><a class="text-link" href="https://github.com/xinnan-tech/xiaozhi-esp32-server/pull/201" target="_blank" rel="noopener noreferrer">Configuration PR #201 ↗</a></p>' : ''}
+    <div class="modal-nav"><button data-modal-next="${projects[(index + 1) % projects.length].id}">${s.next} →</button><span>0${index + 1} / 04</span></div>
+  `;
+  $('.close-dialog').setAttribute('aria-label', s.close);
+  if (!dialog.open) {
+    modalOpener = document.activeElement;
+    dialog.showModal(); journey?.pulse();
+  }
+  dialog.scrollTop = 0;
+  if (!opening) $('.close-dialog').focus();
+}
+$('#main').addEventListener('click', e => {
+  const button = e.target.closest('[data-project]');
+  if (button) showProject(button.dataset.project);
+});
+dialog.addEventListener('click', e => {
+  const next = e.target.closest('[data-modal-next]');
+  if (next) showProject(next.dataset.modalNext, false);
+  const r = dialog.getBoundingClientRect();
+  if (e.target === dialog && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) dialog.close();
+});
+$('.close-dialog').onclick = () => dialog.close();
+dialog.addEventListener('close', () => {
+  if (modalOpener?.isConnected) modalOpener.focus({ preventScroll: true });
+});
+$('#language').onclick = () => {
+  const anchor = ['home', 'projects', ...projects.map(p => p.id), 'experience', 'about'].map(id => {
+    const el = document.getElementById(id); return { id, offset: Math.abs(el.getBoundingClientRect().top), top: el.getBoundingClientRect().top };
+  }).sort((a, b) => a.offset - b.offset)[0];
+  animationContext?.revert();
+  lang = lang === 'zh' ? 'en' : 'zh';
+  try { localStorage.setItem('yw-lang', lang); } catch {}
+  renderPage(); animatePage(); journey?.refresh(); ScrollTrigger.refresh();
+  const el = document.getElementById(anchor.id);
+  window.scrollTo({ top: el.offsetTop - anchor.top, behavior: 'instant' });
+  if (dialog.open) showProject(activeProject, false);
+};
+$('#motion-toggle').onclick = () => setPaused(!paused);
+motionPreference.addEventListener('change', e => setPaused(e.matches));
+
+renderPage();
+journey = createJourney({
+  container: $('#stage'), reduced: paused,
+  onStation(index, name) {
+    $('#scene-control').classList.toggle('on-left', index === 2 || index === 4);
+    $('#scene-control').classList.toggle('is-hero', index === 0);
+    $('#scene-name').textContent = name; $('#scene-number').textContent = '0' + index + ' / 04';
+    document.querySelectorAll('.journey-rail a').forEach((a, i) => {
+      if (i === index) a.setAttribute('aria-current', 'step'); else a.removeAttribute('aria-current');
+    });
+  },
+  onStatus(status) { $('#render-status').textContent = status; },
+});
+animatePage();
+let scrollPending = false;
+addEventListener('scroll', () => {
+  if (scrollPending) return; scrollPending = true;
+  requestAnimationFrame(() => {
+    const total = document.documentElement.scrollHeight - innerHeight;
+    $('.scroll-progress > div').style.width = (total > 0 ? scrollY / total * 100 : 0) + '%';
+    const pastScenes = scrollY > document.querySelector('.source-note').offsetTop - innerHeight * .3;
+    $('.scene-hud').style.opacity = pastScenes ? '0' : '1';
+    $('.journey-rail').style.opacity = pastScenes ? '0' : '1';
+    $('.journey-rail').style.pointerEvents = pastScenes ? 'none' : '';
+    $('.journey-rail').inert = pastScenes;
+    $('#scene-control').hidden = pastScenes;
+    scrollPending = false;
+  });
+}, { passive: true });
+document.fonts.ready.then(() => { journey.refresh(); ScrollTrigger.refresh(); });
+if (import.meta.hot) import.meta.hot.dispose(() => { journey.dispose(); animationContext?.revert(); });
+
+const sceneControl = $('#scene-control');
+let drag = null;
+sceneControl.addEventListener('pointerdown', e => {
+  drag = { x: e.clientX, y: e.clientY, distance: 0 };
+  sceneControl.setPointerCapture(e.pointerId);
+});
+sceneControl.addEventListener('pointermove', e => {
+  if (!drag) return;
+  const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+  drag.distance += Math.abs(dx) + Math.abs(dy);
+  journey.rotate(dx * .008, dy * .006);
+  drag.x = e.clientX; drag.y = e.clientY;
+});
+sceneControl.addEventListener('pointerup', () => {
+  if (drag && drag.distance < 5) journey.pulse();
+  drag = null;
+});
+sceneControl.addEventListener('pointercancel', () => { drag = null; });
+sceneControl.addEventListener('keydown', e => {
+  const keys = { ArrowLeft: [-.15, 0], ArrowRight: [.15, 0], ArrowUp: [0, -.1], ArrowDown: [0, .1] };
+  if (keys[e.key]) { e.preventDefault(); journey.rotate(...keys[e.key]); }
+  else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); journey.pulse(); }
+});
