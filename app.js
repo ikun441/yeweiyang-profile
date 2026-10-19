@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { text, projects } from './content.js';
 import { createJourney } from './scene.js';
+import { frameworkLogos } from './brands.js';
 
 gsap.registerPlugin(ScrollTrigger);
 const $ = selector => document.querySelector(selector);
@@ -71,6 +72,8 @@ function renderPage() {
             <h2 id="title-${p.id}">${s.chapters[i]}</h2>
             <p class="chapter-summary"><strong>${p[lang][0]}</strong><br>${p[lang][1]}</p>
             <div class="tags">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
+            ${p.id === 'bots' ? `<div class="framework-marks" aria-label="${lang === 'zh' ? '接入框架与标识来源' : 'Integrated frameworks and mark sources'}">${frameworkLogos.map(b => `<a href="${b.repo}" target="_blank" rel="noopener noreferrer"><img src="${b.image}" alt="${b.name}" width="32" height="32"><span>${b.name}</span></a>`).join('')}</div>` : ''}
+
             ${p.id === 'blog' ? `<div class="project-stats">${['~50', '~5k', '~2k'].map((n, j) => `<div><b>${n}</b><small>${s.metrics[j]}</small></div>`).join('')}</div>` : ''}
             <button class="round-link project-open" data-project="${p.id}" aria-label="${s.detail}: ${p[lang][0]}"><span class="arrow">↗</span><span>${s.detail}</span></button>
             <p class="project-proof">${s.proofs[i]}</p>

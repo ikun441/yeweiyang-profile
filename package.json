@@ -7,7 +7,7 @@
     "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "check": "node --check app.js && node --check scene.js && node --check content.js"
+    "check": "node --check app.js && node --check scene.js && node --check content.js && node --check brands.js"
   },
   "dependencies": {
     "gsap": "3.15.0",

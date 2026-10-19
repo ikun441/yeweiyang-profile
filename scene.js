@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { frameworkLogos } from './brands.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 
@@ -186,63 +187,127 @@ export function createJourney({ container, onStation, onStatus, reduced }) {
     });
   }
 
-  // 03 — A kinetic network; framework satellites exchange signals with the core.
+  // 03 — Project marks stay legible on floating plaques while the network moves.
   {
     const g = groups[3].sculpture;
     const rig = new THREE.Group(); g.add(rig);
-    const core = box(rig, metal, [0, 0, 0], [1.22, 1.22, 1.22]); core.rotation.set(.3, .6, .2);
+    const core = box(rig, metal, [0, 0, -.15], [1.22, 1.22, 1.22]); core.rotation.set(.3, .6, .2);
     const positions = [[-1.8, 1.1, .2], [1.9, .65, -.2], [.2, -1.5, 1.05]];
-    const names = ['NoneBot2', 'zhenxun_bot', 'Yunzai'];
+    const names = ['nonebot2', 'zhenxun', 'yunzai'];
     const nodes = [], signals = [];
+    const textureLoader = new THREE.TextureLoader();
+    const logoPlaque = (id, position, size = .9) => {
+      const brand = frameworkLogos.find(item => item.id === id);
+      const plaque = new THREE.Group(); plaque.position.set(...position); rig.add(plaque);
+      box(plaque, cream, [0, 0, 0], [size, size, .07]);
+      const material = new THREE.MeshBasicMaterial({ transparent: true, toneMapped: false });
+      const icon = mesh(new THREE.PlaneGeometry(1, 1), material, plaque, [0, 0, .045]);
+      icon.scale.setScalar(size * .84);
+      textureLoader.load(brand.image, texture => {
+        texture.colorSpace = THREE.SRGBColorSpace;
+        texture.anisotropy = Math.min(renderer.capabilities.getMaxAnisotropy(), 4);
+        const aspect = texture.image.width / texture.image.height;
+        icon.scale.set(size * .84 * Math.min(aspect, 1), size * .84 * Math.min(1 / aspect, 1), 1);
+        material.map = texture; material.needsUpdate = true;
+        if (paused) renderFrame(performance.now(), true);
+      });
+      return plaque;
+    };
     positions.forEach((p, i) => {
       const node = box(rig, i === 1 ? green : lavender, p, [.7, .7, .7]); node.rotation.set(.2, -.3, -.2); nodes.push(node);
-      const points = [new THREE.Vector3(), new THREE.Vector3(...p)];
-      rig.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), lineMaterial));
-      label(rig, names[i], 'CONNECTED', [p[0], p[1] + .57, p[2] + .35], [1.3, .43], '#e1eae5', '#343d36');
-      const signal = ball(rig, green, [0, 0, 0], .075); signals.push(signal);
+      rig.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3(...p)]), lineMaterial));
+      logoPlaque(names[i], [p[0], p[1], p[2] + .58], .94);
+      label(rig, frameworkLogos.find(b => b.id === names[i]).name, 'CONNECTED', [p[0], p[1] + .73, p[2] + .58], [1.3, .43], '#e1eae5', '#343d36');
+      signals.push(ball(rig, green, [0, 0, 0], .075));
     });
     const orbit = ring(rig, 2.15, .018, silver); orbit.rotation.set(1.1, .1, -.3);
-    label(core, 'NapCat', 'PROTOCOL / CORE', [0, 0, .52], [.88, .29]);
+    logoPlaque('napcat', [0, 0, .92], 1.15);
+    label(rig, 'NapCat', 'PROTOCOL / CORE', [0, .9, .95], [1.05, .35]);
     animations.push(t => {
-      rig.rotation.y = Math.sin(t * .2) * .3; rig.rotation.z = Math.sin(t * .24) * .07;
+      rig.rotation.y = Math.sin(t * .2) * .22; rig.rotation.z = Math.sin(t * .24) * .05;
       core.rotation.y = .6 + t * .2;
       nodes.forEach((node, i) => { node.rotation.y = t * .2 + i; });
-      signals.forEach((signal, i) => { const f = (t * .3 + i * .32) % 1; signal.position.set(...positions[i]).multiplyScalar(f); });
+      signals.forEach((signal, i) => { signal.position.set(...positions[i]).multiplyScalar((t * .3 + i * .32) % 1); });
     });
   }
 
-  // 04 — An unfolding editorial object with curved pages, type and orbiting notes.
+  // 04 — Coloured paper turns across a central spine, rather than gently rocking.
   {
     const g = groups[4].sculpture;
-    const rig = new THREE.Group(); rig.rotation.set(-.15, -.25, -.12); g.add(rig);
-    const spine = box(rig, lavender, [0, -.8, -.3], [3.7, .22, 2.4]);
+    const rig = new THREE.Group(); rig.rotation.set(-.15, -.22, -.1); rig.position.y = -.15; g.add(rig);
+    const coverMaterial = new THREE.MeshStandardMaterial({ color: 0x614c79, roughness: .82, metalness: .05 });
+    box(rig, coverMaterial, [-.89, 0, -.2], [1.8, 2.4, .13]);
+    box(rig, coverMaterial, [.89, 0, -.2], [1.8, 2.4, .13]);
+    const spine = mesh(new THREE.CylinderGeometry(.075, .075, 2.43, 24), lavender, rig, [0, 0, -.1]);
+    const colours = ['#84658f', '#a17891', '#8d7ca4', '#a689a5'];
+    const pageTexture = (index, back = false) => {
+      const c = document.createElement('canvas'); c.width = 512; c.height = 704;
+      const x = c.getContext('2d');
+      x.fillStyle = colours[index % colours.length]; x.fillRect(0, 0, c.width, c.height);
+      x.fillStyle = '#efe3f0'; x.globalAlpha = .8;
+      x.font = '16px monospace'; x.fillText('FIELD NOTES / 0' + (index + 1), 42, 57);
+      x.font = 'italic 42px Georgia'; x.fillText(back ? 'Stay curious.' : 'Small stories,', 42, 131);
+      x.fillText(back ? 'Keep growing.' : 'real growth.', 42, 184);
+      x.globalAlpha = .3;
+      for (let j = 0; j < 13; j++) x.fillRect(42, 252 + j * 23, 270 + (j % 3) * 49, 3);
+      x.globalAlpha = .7; x.font = '15px monospace'; x.fillText('YEWEIYANG / JOURNAL', 42, 655);
+      x.globalAlpha = .15; x.fillRect(18, 20, 2, 662);
+      const texture = new THREE.CanvasTexture(c); texture.colorSpace = THREE.SRGBColorSpace;
+      if (back) { texture.wrapS = THREE.RepeatWrapping; texture.repeat.x = -1; texture.offset.x = 1; }
+      return texture;
+    };
     const pages = [];
-    for (let i = 0; i < 5; i++) {
-      const geometry = new THREE.PlaneGeometry(3.1, 2.15, 36, 24);
-      const attr = geometry.attributes.position;
-      for (let j = 0; j < attr.count; j++) {
-        const x = attr.getX(j), y = attr.getY(j);
-        attr.setZ(j, Math.sin((x + 1.55) * 1.0) * .32 + Math.cos(y * 1.3) * .12);
+    const makePage = (index, turning) => {
+      const hinge = new THREE.Group(); rig.add(hinge);
+      const geometry = new THREE.PlaneGeometry(1.67, 2.18, 28, 16);
+      geometry.translate(.835, 0, 0);
+      const material = new THREE.MeshStandardMaterial({ map: pageTexture(index), color: 0x785387, roughness: .93, metalness: 0, side: THREE.FrontSide, envMapIntensity: .15 });
+      const front = mesh(geometry, material, hinge);
+      const back = mesh(geometry, new THREE.MeshStandardMaterial({ map: pageTexture(index, true), color: 0x785387, roughness: .93, side: THREE.BackSide, envMapIntensity: .15 }), hinge);
+      const base = Float32Array.from(geometry.attributes.position.array);
+      hinge.position.z = turning ? .03 : -.1 + index * .008;
+      if (turning) {
+        pages.push({ hinge, geometry, base, front, back });
       }
-      geometry.computeVertexNormals();
-      const material = new THREE.MeshStandardMaterial({ color: i === 4 ? 0xf7f0e3 : 0xe1d7cd, roughness: .6, side: THREE.DoubleSide });
-      const page = mesh(geometry, material, rig, [0, -.5 + i * .15, -.3 + i * .07]);
-      page.rotation.x = -1.0 + i * .13; pages.push(page);
+      return hinge;
+    };
+    // Stable left/right page stacks keep the book full throughout the repeat.
+    for (let i = 0; i < 3; i++) {
+      makePage(i, false).rotation.y = -.04;
+      makePage(i + 1, false).rotation.y = -Math.PI + .04;
     }
-    const front = label(rig, 'A place', 'TO GROW / WORDPRESS', [0, .52, .9], [2.8, .93], '#f7f0e3', '#59496a');
-    front.rotation.x = -.2;
-    const flower = new THREE.Group(); flower.position.set(1.7, 1.2, 0); rig.add(flower);
+    for (let i = 0; i < 4; i++) makePage(i, true);
+    label(rig, 'A place to grow.', 'NOTES / WORDPRESS', [0, 1.66, .05], [2.8, .68], '#715a83', '#f0e2ee');
+    const flower = new THREE.Group(); flower.position.set(1.78, 1.35, .1); rig.add(flower);
     for (let i = 0; i < 6; i++) {
-      const petal = ball(flower, lavender, [Math.cos(i * Math.PI / 3) * .3, Math.sin(i * Math.PI / 3) * .3, 0], .22);
-      petal.scale.z = .45;
+      const petal = ball(flower, lavender, [Math.cos(i * Math.PI / 3) * .25, Math.sin(i * Math.PI / 3) * .25, 0], .18); petal.scale.z = .45;
     }
-    ball(flower, green, [0, 0, .1], .16);
-    const note = label(rig, '5k ↗', 'PAGE VIEWS / YEAR', [-1.7, 1.2, .4], [1.2, .4], '#d7fb74', '#27232f');
+    ball(flower, green, [0, 0, .1], .14);
+    const note = label(rig, '5k ↗', 'PAGE VIEWS / YEAR', [-1.75, 1.65, .4], [1.05, .35], '#d7fb74', '#27232f');
     animations.push(t => {
-      rig.rotation.y = -.25 + Math.sin(t * .25) * .17;
-      pages.forEach((p, i) => { p.rotation.x = -1 + i * .13 + Math.sin(t * .7 + i * .4) * .09; });
-      flower.rotation.z = t * .15; note.position.y = 1.2 + Math.sin(t * .8) * .12;
-      spine.position.y = -.8 + Math.sin(t * .7) * .03;
+      rig.rotation.y = -.22 + Math.sin(t * .22) * .1;
+      const halfCycle = 12.8, cycle = halfCycle * 2, interval = halfCycle / pages.length;
+      const phase = t % cycle;
+      const turnTime = phase <= halfCycle ? phase : cycle - phase;
+      pages.forEach(({ hinge, geometry, base }, i) => {
+        const local = turnTime - i * interval;
+        const progress = clamp(local / 2.65, 0, 1);
+        const turn = smooth(progress);
+        hinge.rotation.y = -.04 - turn * (Math.PI - .08);
+        // Reverse the sequence on the return half; no visible reset or teleport.
+        hinge.position.z = .025 + ((pages.length - i) * (1 - progress) + (i + 1) * progress) * .014 + Math.sin(progress * Math.PI) * .05;
+        const position = geometry.attributes.position;
+        const curl = Math.sin(progress * Math.PI);
+        for (let j = 0; j < position.count; j++) {
+          const x = base[j * 3], y = base[j * 3 + 1];
+          position.setXYZ(j, x, y + Math.sin(x * 1.9) * curl * .035,
+            Math.sin(x / 1.67 * Math.PI) * curl * .3 + Math.pow(x / 1.67, 2) * curl * .13);
+        }
+        position.needsUpdate = true;
+        geometry.computeVertexNormals();
+      });
+      flower.rotation.z = t * .15; note.position.y = 1.65 + Math.sin(t * .8) * .07;
+      spine.position.y = Math.sin(t * .7) * .015;
     });
   }
 
@@ -324,6 +389,7 @@ export function createJourney({ container, onStation, onStatus, reduced }) {
     renderer.render(scene, camera);
   }
   function tick(now) {
+    if (paused || document.hidden) { running = false; return; }
     renderFrame(now);
     if (!paused && !document.hidden) requestAnimationFrame(tick);
     else running = false;
