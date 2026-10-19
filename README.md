@@ -2,6 +2,8 @@
 
 [中文](#中文说明) · [English](#english)
 
+云服务器部署：<http://47.117.149.126:5173/> · [部署与更新说明 / Deployment guide](deploy/README.md)
+
 ## 中文说明
 
 一个以项目经历为核心的中英双语个人简历与作品集，使用 **Three.js + GSAP + Vite** 构建。滚动页面时，相机会穿行于五个真实 WebGL 场景，并同步切换配色、排版与项目故事。
