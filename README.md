@@ -25,7 +25,7 @@ npm run preview
 - **首屏**：虹彩金属雕塑、建筑拱门与环绕轨道。
 - **流萤**：悬浮财务工作台、数据柱与金币，介绍金融科技毕业作品。
 - **语音接入**：纵深声波环与动态波形，展示已合并的 ACGNTTS 开源贡献。
-- **机器人生态**：NapCat、NoneBot2、真寻、Yunzai 标识贴牌和信号传递网络；同时提供可访问的 Logo 链接。
+- **机器人生态**：NapCat、NoneBot2、真寻、Yunzai 独立圆形悬浮标识、分层连线和信号传递网络（无正方体底座）；同时提供可访问的 Logo 链接。
 - **个人博客**：灰紫 / 豆沙色纸张、印刷纹理和绕书脊依次翻转的自动翻页；翻页会自然反向循环。
 - 支持鼠标拖动、方向键旋转、场景导航、中英切换、项目详情、打印简历。
 - 可暂停动画，并遵循系统“减少动态效果”偏好。暂停时自动翻页也会停止。
@@ -85,7 +85,7 @@ Development: http://127.0.0.1:5173 . Production output: dist/ . Vite uses relati
 
 ## Experience
 
-- Five real-time 3D installations: iridescent chrome knot and architectural portal; floating financial dashboard, bars and coins; concentric acoustic lenses and animated waveform; connected bot framework network with local project logo plaques and moving signals; mauve printed book pages that turn sequentially around the spine and reverse smoothly.
+- Five real-time 3D installations: iridescent chrome knot and architectural portal; floating financial dashboard, bars and coins; concentric acoustic lenses and animated waveform; connected bot framework network with independent circular project medallions, a protocol-to-framework hierarchy, and moving signals, without cubes; mauve printed book pages that turn sequentially around the spine and reverse smoothly.
 - Continuous scroll-driven camera travel through depth, interpolated palettes and cinematic camera banking.
 - Drag / arrow-key sculpture rotation, pointer parallax, scene navigation, animated typography and project dialog transitions.
 - Chinese / English content, keyboard-operable native dialogs and navigation, motion pause, OS reduced-motion support, print résumé.
