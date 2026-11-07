@@ -168,3 +168,17 @@ html[lang="en"] .hero h1{font-size:clamp(65px,7.4vw,120px)}
 @media(max-width:680px){.framework-marks{gap:5px;margin-top:12px}.framework-marks a{font-size:8px;gap:4px;padding:4px 6px 4px 4px}.framework-marks img{height:25px;width:25px}}
 
 @media(max-width:680px){#bots .chapter-inner{top:32svh}.framework-marks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.framework-marks a{flex-direction:column;gap:3px;font-size:6.5px;padding:5px 2px}.framework-marks img{width:23px;height:23px}}
+
+.recent-section{background:#e5dfed}
+.recent-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.recent-card{position:relative;padding:32px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(135deg,#fbf9fcbd,#ede7f3b3);box-shadow:0 14px 40px #47305c08}
+.recent-card:first-child{grid-column:1/-1;background:linear-gradient(120deg,#e8d8ec,#f1e9f6 60%,#e0e7d9)}
+.recent-card h3{font-size:clamp(21px,2.2vw,32px);font-weight:500;line-height:1.35;margin:22px 0 16px;overflow-wrap:anywhere}
+.recent-summary{color:var(--muted);font-size:13px;max-width:650px;line-height:1.9}
+.recent-card .eyebrow{font-size:8px;flex-wrap:wrap}
+.recent-card .round-link{margin-top:18px}
+.recent-source{display:inline-block;margin-left:20px;font-size:10px;text-decoration:underline;text-underline-offset:4px}
+@media(max-width:650px){.recent-grid{grid-template-columns:1fr}.recent-card{padding:24px}.recent-card:first-child{grid-column:auto}}
+@media print{.recent-grid{display:block}.recent-card{break-inside:avoid;border-radius:0;box-shadow:none;background:none;padding:16px 0}.recent-card h3{font-size:18px}.recent-summary{font-size:10px}.recent-card .round-link{display:none}.recent-source{margin:8px 0}.recent-section{background:white}}
+
+.recent-jump{align-self:flex-start;margin-top:12px}

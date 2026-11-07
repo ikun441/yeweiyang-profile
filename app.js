@@ -1,7 +1,7 @@
 import './style.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { text, projects } from './content.js';
+import { text, projects, recentProjects } from './content.js';
 import { createJourney } from './scene.js';
 import { frameworkLogos } from './brands.js';
 
@@ -19,11 +19,11 @@ const sectionCopy = {
     headline: '<span class="line"><span>不止于</span></span><span class="line"><span>一个</span></span><span class="line"><span><em>维度。</em></span></span>',
     intro: '我是 <strong>yeweiyang</strong>。以金融科技为起点，在代码、财税与开源社区之间，探索更多可能。',
     enter: '进入我的项目空间', scroll: '向下滚动，穿行于不同维度', art: '逻辑 · 好奇心 · 创造力',
-    work: '四个项目，四种探索。',
+    work: '项目在生长，探索不设限。',
     workIntro: '沿着一条空间路径，看见技术如何连接真实的业务与人。',
     chapters: ['流萤，<br><em>数有所依。</em>', '让文字，<br><em>有了声音。</em>', '连接，<br><em>不止一种。</em>', '留一处，<br><em>自由生长。</em>'],
     detail: '走进这个项目', pause: '暂停动态', play: '开启动态', interact: '触动空间',
-    proofs: ['金融科技毕业作品 · 持续迭代', '上游 PR #200 / #201 已合并', '三方框架接入 · 社区持续运营', '独立建站 · ICP 备案 · 内容运营'],
+    proofs: ['v2.0.0a2 会计核算内测 · 金融科技毕业作品', '上游 PR #200 / #201 已合并', '三方框架接入 · 社区持续运营', '独立建站 · ICP 备案 · 内容运营'],
     metrics: ['新增用户', '浏览量', '真实访客'],
     contact: '让下一次相遇，<br>发生点<em>新东西。</em>',
     next: '下一个项目', previous: '上一个项目', source: '源码 / 贡献记录', close: '关闭项目详情',
@@ -33,11 +33,11 @@ const sectionCopy = {
     headline: '<span class="line"><span>Beyond</span></span><span class="line"><span>one</span></span><span class="line"><span><em>dimension.</em></span></span>',
     intro: 'I’m <strong>yeweiyang</strong>. Exploring the possibilities between financial technology, code, and open-source communities.',
     enter: 'Step into my work', scroll: 'SCROLL TO EXPLORE THE DIMENSIONS', art: 'LOGIC · CURIOSITY · CREATIVITY',
-    work: 'Four projects. New perspectives.',
+    work: 'Growing projects. New perspectives.',
     workIntro: 'Follow a spatial journey through technology, real business needs, and human connections.',
     chapters: ['Finance,<br><em>made fluid.</em>', 'Give words<br><em>a voice.</em>', 'Connected<br><em>by curiosity.</em>', 'A place<br><em>to grow.</em>'],
     detail: 'Inside the project', pause: 'PAUSE MOTION', play: 'ENABLE MOTION', interact: 'ACTIVATE SPACE',
-    proofs: ['FINTECH GRADUATION PROJECT / IN DEVELOPMENT', 'UPSTREAM PR #200 / #201 MERGED', 'THREE FRAMEWORKS / COMMUNITY OPERATIONS', 'INDEPENDENT SITE / ICP FILING / CONTENT'],
+    proofs: ['v2.0.0a2 ACCOUNTING ALPHA / FINTECH PROJECT', 'UPSTREAM PR #200 / #201 MERGED', 'THREE FRAMEWORKS / COMMUNITY OPERATIONS', 'INDEPENDENT SITE / ICP FILING / CONTENT'],
     metrics: ['NEW USERS', 'PAGE VIEWS', 'UNIQUE VISITORS'],
     contact: 'Let’s make the next<br>intersection <em>matter.</em>',
     next: 'Next project', previous: 'Previous project', source: 'SOURCE / CONTRIBUTION', close: 'Close project details',
@@ -62,7 +62,7 @@ function renderPage() {
       <div class="hero-index" aria-hidden="true">FIG. 00 — THE INTERSECTION</div>
       <div class="hero-bottom"><a class="scroll-cue" href="#projects"><span class="scroll-line"></span>${s.scroll}</a><div>INDEPENDENT MIND.<br>${s.art}</div></div>
     </section>
-    <section class="work-intro" id="projects"><p class="eyebrow">01 — 04 / SELECTED EXPLORATIONS</p><h2>${s.work}</h2><p>${s.workIntro}</p></section>
+    <section class="work-intro" id="projects"><p class="eyebrow">01 — 04 / SELECTED EXPLORATIONS</p><h2>${s.work}</h2><p>${s.workIntro}</p><a class="text-link recent-jump" href="#recent">${lang === 'zh' ? '查看近期新增项目 ↓' : 'Explore recent projects ↓'}</a></section>
     <div class="project-journey">
       ${projects.map((p, i) => `
         <section class="chapter" id="${p.id}" data-scene="${i + 1}" aria-labelledby="title-${p.id}">
@@ -82,20 +82,24 @@ function renderPage() {
         </section>`).join('')}
     </div>
     <p class="source-note">${c.sourceNote}</p>
+    <section class="paper-section recent-section" id="recent" aria-labelledby="recent-title">
+      <div class="section-heading reveal"><div><p class="eyebrow">PROJECT INDEX / 2026.11</p><h2 id="recent-title">${lang === 'zh' ? '最近，把想法推进一步。' : 'New work. Further possibilities.'}</h2></div><p>${lang === 'zh' ? '近期公开项目与迭代，更新于 2026 年 11 月 7 日。点击了解实践、成果与当前边界。' : 'Recent public projects, reviewed November 7, 2026. Explore the work, outcomes and current limitations.'}</p></div>
+      <div class="recent-grid">${recentProjects.map((p, i) => `<article class="recent-card reveal" id="${p.id}"><p class="eyebrow">0${i + 5} / ${p.category}</p><h3>${p[lang][0]}</h3><p class="recent-summary">${p[lang][1]}</p><div class="tags">${p.tags.map(t => `<span>${t}</span>`).join('')}</div><p class="project-proof">${p.proof[lang]}</p><button class="round-link project-open" data-project="${p.id}" aria-label="${s.detail}: ${p[lang][0]}"><span class="arrow">↗</span><span>${s.detail}</span></button><a class="recent-source" href="${p.url}" target="_blank" rel="noopener noreferrer">GitHub ↗</a></article>`).join('')}</div>
+    </section>
     <section class="paper-section experience-section" id="experience">
-      <div class="section-heading reveal"><div><p class="eyebrow">05 / IN THE REAL WORLD</p><h2>${c.experienceTitle}</h2></div><p>${c.experienceIntro}</p></div>
+      <div class="section-heading reveal"><div><p class="eyebrow">10 / IN THE REAL WORLD</p><h2>${c.experienceTitle}</h2></div><p>${c.experienceIntro}</p></div>
       <article class="experience-layout reveal"><div><span class="date">2026.03 — 2026.06</span><h3>${c.taxOffice}</h3><p class="muted">${c.internship}</p><div class="experience-symbol" aria-hidden="true">↗</div></div>
         <div><p class="experience-lead">${c.taxLead}</p><ol class="task-list">${[1, 2, 3, 4].map(i => `<li>${c['task' + i]}</li>`).join('')}</ol><div class="tags"><span>${c.system1}</span><span>${c.system2}</span><span>${c.system3}</span></div></div>
       </article>
     </section>
     <section class="paper-section about-section" id="about">
-      <div class="section-heading reveal"><div><p class="eyebrow">06 / ALWAYS IN PROGRESS</p><h2>${c.aboutTitle}</h2></div><p>${c.aboutIntro}</p></div>
+      <div class="section-heading reveal"><div><p class="eyebrow">11 / ALWAYS IN PROGRESS</p><h2>${c.aboutTitle}</h2></div><p>${c.aboutIntro}</p></div>
       <div class="about-grid reveal"><article class="education"><p class="eyebrow">${c.education}</p><h3>${c.major}</h3><p class="muted">${c.degree}</p><div class="education-bottom"><b>2024 — 2027</b><span>CET-4 / CET-6</span></div></article>
         <article class="awards" aria-label="${c.awards}">${c.awardList.map(([name, prize]) => `<div class="award"><span aria-hidden="true">✳</span><div><p>${name}</p><small>${prize}</small></div></div>`).join('')}</article>
       </div>
       <div class="skills reveal">${['Python', 'API Integration', 'WordPress', 'Cloudflare', c.skillData, c.skillTax, c.skillCommunity].map(t => `<span>${t}</span>`).join('')}</div>
     </section>
-    <section class="contact"><p class="eyebrow">07 / AN OPEN INVITATION</p><h2 class="reveal">${s.contact}</h2><div class="contact-bottom"><p>${c.contactText}</p><a class="round-link" href="https://github.com/ikun441" target="_blank" rel="noopener noreferrer"><span class="arrow">↗</span><span>${c.contactButton}</span></a></div></section>
+    <section class="contact"><p class="eyebrow">12 / AN OPEN INVITATION</p><h2 class="reveal">${s.contact}</h2><div class="contact-bottom"><p>${c.contactText}</p><a class="round-link" href="https://github.com/ikun441" target="_blank" rel="noopener noreferrer"><span class="arrow">↗</span><span>${c.contactButton}</span></a></div></section>
     <footer><a class="wordmark" href="#home">yeweiyang<span>®</span></a><span>© 2026 / PERSONAL EXPLORATIONS</span><a href="#home">${c.backTop}</a></footer>
   `;
   $('#scene-control span').textContent = lang === 'zh' ? '拖动旋转 / 点击触动' : 'DRAG TO ROTATE / CLICK TO PLAY';
@@ -133,19 +137,22 @@ function setPaused(value) {
   paused = value; updateMotionButton(); journey?.setPaused(value); animatePage(); ScrollTrigger.refresh();
 }
 function showProject(id, opening = true) {
-  const p = projects.find(p => p.id === id), t = p[lang], c = text[lang], s = sectionCopy[lang];
+  const allProjects = [...projects, ...recentProjects];
+  const p = allProjects.find(p => p.id === id);
+  if (!p) return;
+  const t = p[lang], c = text[lang], s = sectionCopy[lang];
   activeProject = id;
-  const index = projects.indexOf(p);
+  const index = allProjects.indexOf(p);
   $('#dialog-content').innerHTML = `
     <p class="eyebrow">${p.category}</p><h2 id="dialog-title">${t[0]}</h2>
-    <p class="dialog-proof">${s.proofs[index]}</p>
+    <p class="dialog-proof">${p.proof?.[lang] ?? s.proofs[index]}</p>
     <div class="tags">${p.tags.map(tag => `<span>${tag}</span>`).join('')}</div>
     <h3>${c.context}</h3><p>${t[2]}</p><h3>${c.practice}</h3>
     <ul>${t[3].map(step => `<li>${step}</li>`).join('')}</ul>
     <h3>${c.outcome}</h3><p>${t[4]}</p>
     <a class="dialog-link" href="${p.url}" target="_blank" rel="noopener noreferrer">${c.link}</a>
     ${id === 'tts' ? '<p><a class="text-link" href="https://github.com/xinnan-tech/xiaozhi-esp32-server/pull/201" target="_blank" rel="noopener noreferrer">Configuration PR #201 ↗</a></p>' : ''}
-    <div class="modal-nav"><button data-modal-next="${projects[(index + 1) % projects.length].id}">${s.next} →</button><span>0${index + 1} / 04</span></div>
+    <div class="modal-nav"><button data-modal-next="${allProjects[(index + 1) % allProjects.length].id}">${s.next} →</button><span>${String(index + 1).padStart(2, '0')} / ${String(allProjects.length).padStart(2, '0')}</span></div>
   `;
   $('.close-dialog').setAttribute('aria-label', s.close);
   if (!dialog.open) {
@@ -170,7 +177,7 @@ dialog.addEventListener('close', () => {
   if (modalOpener?.isConnected) modalOpener.focus({ preventScroll: true });
 });
 $('#language').onclick = () => {
-  const anchor = ['home', 'projects', ...projects.map(p => p.id), 'experience', 'about'].map(id => {
+  const anchor = ['home', 'projects', ...projects.map(p => p.id), 'recent', ...recentProjects.map(p => p.id), 'experience', 'about'].map(id => {
     const el = document.getElementById(id); return { id, offset: Math.abs(el.getBoundingClientRect().top), top: el.getBoundingClientRect().top };
   }).sort((a, b) => a.offset - b.offset)[0];
   animationContext?.revert();

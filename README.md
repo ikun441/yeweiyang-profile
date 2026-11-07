@@ -33,6 +33,10 @@ npm run preview
 - 可暂停动画，并遵循系统“减少动态效果”偏好。暂停时自动翻页也会停止。
 - 提供像素比限制、后台暂停、雾化和场景裁剪；WebGL 不可用时显示静态降级画面。
 
+### 近期项目同步（2026-11-07）
+
+流萤已更新为 v2.0.0a2 会计核算内测介绍；新增 Soulbot v2.2.0、弗洛洛 ERP v1.0.10 开发版、琴屿、emotions-skill 和 Soulbot 插件仓库的双语项目卡片及详情。介绍依据公开仓库 README，开发与待验收状态分别标注。保留原有四段项目 3D 场景。
+
 ### 文件维护
 
 | 文件 | 用途 |
@@ -95,6 +99,10 @@ Development: http://127.0.0.1:5173 . Production output: dist/ . Vite uses relati
 - Chinese / English content, keyboard-operable native dialogs and navigation, motion pause, OS reduced-motion support, print résumé.
 - Capped device pixel ratio, visibility-based animation pause, fog and station culling, static fallback if WebGL cannot initialize or loses its context.
 - No external 3D models. Geometry, page textures and studio environment are generated locally; project marks are bundled locally with source credits. Google Fonts are optional, with system fallbacks.
+
+## Recent projects (2026-11-07)
+
+Updated Firefly to its v2.0.0a2 accounting alpha and added bilingual cards and details for Soulbot v2.2.0, Floluo ERP v1.0.10 development, Piano Island, emotions-skill and Soulbot Plugins. Descriptions follow public repository READMEs and distinguish development status from acceptance. The four existing 3D project scenes are retained.
 
 ## Maintain
 
