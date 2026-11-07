@@ -14,3 +14,15 @@
 NapCat、真寻的大图按比例缩小以减少传输，未重绘图案。Yunzai 当前维护仓库未提供独立 logo，因此采用云崽社区文档的项目图像，而非维护者个人头像。
 
 NapCat and zhenxun artwork is proportionally downscaled. The current Yunzai implementation repository has no standalone logo; the community documentation image is used instead of a maintainer avatar.
+
+## 本人项目标识 / Portfolio project marks
+
+获取日期 / Retrieved: 2026-11-07。按公开仓库原图展示，不重绘、不改变比例；同时用于 DOM 标识与 Three.js 贴图。/ Original public project artwork, used without redrawing or changing aspect ratios in the DOM and Three.js scenes.
+
+| 本地文件 / File | 项目 / Project | 原始来源 / Source |
+| --- | --- | --- |
+| firefly.jpg | 流萤 Firefly | [仓库图片](https://github.com/ikun441/firefly_bot/blob/main/index/assets/brand/firefly-logo.jpg) |
+| soulbot.png | Soulbot | [README](https://github.com/ikun441/Soulbot) · [原图](https://github.com/user-attachments/assets/21dca2f0-f1f7-4e2b-b302-3385aa274515) |
+| floluo.png | 弗洛洛 ERP | [仓库图片](https://github.com/ikun441/floluo-erp-/blob/main/frontend/public/brand/floluo-logo.png) |
+
+琴屿、emotions-skill 与 soulbot_plugins 的已核对文档未提供独立项目 Logo，因此保留文字名称；soulbot_plugins 未复用主程序标识冒充独立 Logo。/ No independent logo was found in the reviewed documentation for Piano Island, emotions-skill or soulbot_plugins; these keep their text identities.

@@ -6,7 +6,7 @@
 
 ## 中文说明
 
-一个以项目经历为核心的中英双语个人简历与作品集，使用 **Three.js + GSAP + Vite** 构建。滚动页面时，相机会穿行于五个真实 WebGL 场景，并同步切换配色、排版与项目故事。
+一个以项目经历为核心的中英双语个人简历与作品集，使用 **Three.js + GSAP + Vite** 构建。滚动页面时，相机会穿行于十个真实 WebGL 场景，并同步切换配色、排版与项目故事。
 
 ### 本地运行
 
@@ -35,7 +35,7 @@ npm run preview
 
 ### 近期项目同步（2026-11-07）
 
-流萤已更新为 v2.0.0a2 会计核算内测介绍；新增 Soulbot v2.2.0、弗洛洛 ERP v1.0.10 开发版、琴屿、emotions-skill 和 Soulbot 插件仓库的双语项目卡片及详情。介绍依据公开仓库 README，开发与待验收状态分别标注。保留原有四段项目 3D 场景。
+流萤已更新为 v2.0.0a2 会计核算内测介绍；新增 Soulbot v2.2.0、弗洛洛 ERP v1.0.10 开发版、琴屿、emotions-skill 和 Soulbot 插件仓库的独立 3D 场景与双语详情。介绍依据公开仓库 README，开发与待验收状态分别标注。共九段项目场景加首屏雕塑：记忆轨道、仓储传送与审批扫描、自动琴键与上升音符、情绪状态网络、插件拆合轨道。镜头连续穿行并改变配色、视角与焦距；支持直接跳转、拖动、暂停和减少动态效果。流萤、Soulbot、ERP 使用项目公开 Logo 的本地贴图。
 
 ### 文件维护
 
@@ -44,6 +44,7 @@ npm run preview
 | `content.js` | 双语简历资料与项目案例 |
 | `app.js` | 页面结构、语言切换与交互 |
 | `scene.js` | 三维模型、材质、相机及动画 |
+| `new-scenes.js` | 五个新增项目的独立模型与动画 |
 | `brands.js` | 四个机器人项目的本地 Logo 与来源链接 |
 | `assets/logos/` | 本地标识及双语来源说明 |
 | `style.css` | 视觉、响应式和打印样式 |
@@ -93,7 +94,7 @@ Development: http://127.0.0.1:5173 . Production output: dist/ . Vite uses relati
 
 ## Experience
 
-- Five real-time 3D installations: iridescent chrome knot and architectural portal; floating financial dashboard, bars and coins; concentric acoustic lenses and animated waveform; connected bot framework network with independent circular project medallions, a protocol-to-framework hierarchy, and moving signals, without cubes; mauve printed book pages that turn sequentially around the spine and reverse smoothly.
+- Ten real-time 3D installations: iridescent chrome knot and architectural portal; floating financial dashboard, bars and coins; concentric acoustic lenses and animated waveform; connected bot framework network with independent circular project medallions, a protocol-to-framework hierarchy, and moving signals, without cubes; mauve printed book pages that turn sequentially around the spine and reverse smoothly.
 - Continuous scroll-driven camera travel through depth, interpolated palettes and cinematic camera banking.
 - Drag / arrow-key sculpture rotation, pointer parallax, scene navigation, animated typography and project dialog transitions.
 - Chinese / English content, keyboard-operable native dialogs and navigation, motion pause, OS reduced-motion support, print résumé.
@@ -102,7 +103,7 @@ Development: http://127.0.0.1:5173 . Production output: dist/ . Vite uses relati
 
 ## Recent projects (2026-11-07)
 
-Updated Firefly to its v2.0.0a2 accounting alpha and added bilingual cards and details for Soulbot v2.2.0, Floluo ERP v1.0.10 development, Piano Island, emotions-skill and Soulbot Plugins. Descriptions follow public repository READMEs and distinguish development status from acceptance. The four existing 3D project scenes are retained.
+Updated Firefly to its v2.0.0a2 accounting alpha and added independent 3D scenes and bilingual details for Soulbot v2.2.0, Floluo ERP v1.0.10 development, Piano Island, emotions-skill and Soulbot Plugins. Descriptions follow public repository READMEs and distinguish development status from acceptance. Nine project scenes plus the opening sculpture now share a continuous camera journey, palette transitions and dolly motion. New models animate memory orbits, warehouse parcels and approval scanning, piano keys and notes, emotion networks and modular plugins. Public Firefly, Soulbot and ERP marks are bundled locally. Pause, reduced motion, direct scene navigation and drag rotation are preserved.
 
 ## Maintain
 

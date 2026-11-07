@@ -1,10 +1,11 @@
 import './style.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { text, projects, recentProjects } from './content.js';
+import { text, projects as originalProjects, recentProjects } from './content.js';
 import { createJourney } from './scene.js';
-import { frameworkLogos } from './brands.js';
+import { frameworkLogos, projectLogos } from './brands.js';
 
+const projects = [...originalProjects, ...recentProjects];
 gsap.registerPlugin(ScrollTrigger);
 const $ = selector => document.querySelector(selector);
 const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
@@ -44,6 +45,12 @@ const sectionCopy = {
   },
 };
 
+
+sectionCopy.zh.chapters.push('让交流，<br><em>留下记忆。</em>', '让业务，<br><em>有序流动。</em>', '触动，<br><em>每一个音符。</em>', '情绪，<br><em>有迹可循。</em>', '能力，<br><em>自由组合。</em>');
+sectionCopy.en.chapters.push('More than<br><em>a reply.</em>', 'Business,<br><em>in motion.</em>', 'Every key,<br><em>a possibility.</em>', 'A state<br><em>of feeling.</em>', 'Built to<br><em>connect.</em>');
+for (const language of ['zh', 'en']) sectionCopy[language].proofs.push(...recentProjects.map(p => p.proof[language]));
+const sceneTags = ['FINANCIAL FLOW', 'RESONANCE', 'CONNECTED', 'UNFOLD', 'MEMORY OBSERVATORY', 'BUSINESS IN MOTION', 'KEYS & FREQUENCIES', 'INNER STATE', 'MODULAR ORBIT'];
+
 function renderPage() {
   const c = text[lang], s = sectionCopy[lang];
   document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
@@ -62,7 +69,7 @@ function renderPage() {
       <div class="hero-index" aria-hidden="true">FIG. 00 — THE INTERSECTION</div>
       <div class="hero-bottom"><a class="scroll-cue" href="#projects"><span class="scroll-line"></span>${s.scroll}</a><div>INDEPENDENT MIND.<br>${s.art}</div></div>
     </section>
-    <section class="work-intro" id="projects"><p class="eyebrow">01 — 04 / SELECTED EXPLORATIONS</p><h2>${s.work}</h2><p>${s.workIntro}</p><a class="text-link recent-jump" href="#recent">${lang === 'zh' ? '查看近期新增项目 ↓' : 'Explore recent projects ↓'}</a></section>
+    <section class="work-intro" id="projects"><p class="eyebrow">01 — 09 / SPATIAL EXPLORATIONS</p><h2>${s.work}</h2><p>${s.workIntro}</p><nav class="project-index" aria-label="${lang === 'zh' ? '直接进入项目场景' : 'Jump to a project scene'}">${projects.map((p,i)=>`<a href="#${p.id}"><small>${String(i+1).padStart(2,'0')}</small>${p[lang][0].split(' · ')[0]}<span>↗</span></a>`).join('')}</nav></section>
     <div class="project-journey">
       ${projects.map((p, i) => `
         <section class="chapter" id="${p.id}" data-scene="${i + 1}" aria-labelledby="title-${p.id}">
@@ -71,6 +78,7 @@ function renderPage() {
             <p class="eyebrow">${p.category}</p>
             <h2 id="title-${p.id}">${s.chapters[i]}</h2>
             <p class="chapter-summary"><strong>${p[lang][0]}</strong><br>${p[lang][1]}</p>
+            ${projectLogos.some(b => b.id === p.id) ? `<a class="project-brand" href="${p.url}" target="_blank" rel="noopener noreferrer"><img src="${projectLogos.find(b => b.id === p.id).image}" alt="${projectLogos.find(b => b.id === p.id).name} Logo" width="52" height="52"><span>${lang === 'zh' ? '项目标识 / 公开仓库' : 'PROJECT MARK / PUBLIC SOURCE'} ↗</span></a>` : ''}
             <div class="tags">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
             ${p.id === 'bots' ? `<div class="framework-marks" aria-label="${lang === 'zh' ? '接入框架与标识来源' : 'Integrated frameworks and mark sources'}">${frameworkLogos.map(b => `<a href="${b.repo}" target="_blank" rel="noopener noreferrer"><img src="${b.image}" alt="${b.name}" width="32" height="32"><span>${b.name}</span></a>`).join('')}</div>` : ''}
 
@@ -78,14 +86,10 @@ function renderPage() {
             <button class="round-link project-open" data-project="${p.id}" aria-label="${s.detail}: ${p[lang][0]}"><span class="arrow">↗</span><span>${s.detail}</span></button>
             <p class="project-proof">${s.proofs[i]}</p>
           </div></div>
-          <span class="scene-tag" aria-hidden="true">0${i + 1} / ${['FINANCIAL FLOW', 'RESONANCE', 'CONNECTED', 'UNFOLD'][i]}</span>
+          <span class="scene-tag" aria-hidden="true">0${i + 1} / ${sceneTags[i]}</span>
         </section>`).join('')}
     </div>
     <p class="source-note">${c.sourceNote}</p>
-    <section class="paper-section recent-section" id="recent" aria-labelledby="recent-title">
-      <div class="section-heading reveal"><div><p class="eyebrow">PROJECT INDEX / 2026.11</p><h2 id="recent-title">${lang === 'zh' ? '最近，把想法推进一步。' : 'New work. Further possibilities.'}</h2></div><p>${lang === 'zh' ? '近期公开项目与迭代，更新于 2026 年 11 月 7 日。点击了解实践、成果与当前边界。' : 'Recent public projects, reviewed November 7, 2026. Explore the work, outcomes and current limitations.'}</p></div>
-      <div class="recent-grid">${recentProjects.map((p, i) => `<article class="recent-card reveal" id="${p.id}"><p class="eyebrow">0${i + 5} / ${p.category}</p><h3>${p[lang][0]}</h3><p class="recent-summary">${p[lang][1]}</p><div class="tags">${p.tags.map(t => `<span>${t}</span>`).join('')}</div><p class="project-proof">${p.proof[lang]}</p><button class="round-link project-open" data-project="${p.id}" aria-label="${s.detail}: ${p[lang][0]}"><span class="arrow">↗</span><span>${s.detail}</span></button><a class="recent-source" href="${p.url}" target="_blank" rel="noopener noreferrer">GitHub ↗</a></article>`).join('')}</div>
-    </section>
     <section class="paper-section experience-section" id="experience">
       <div class="section-heading reveal"><div><p class="eyebrow">10 / IN THE REAL WORLD</p><h2>${c.experienceTitle}</h2></div><p>${c.experienceIntro}</p></div>
       <article class="experience-layout reveal"><div><span class="date">2026.03 — 2026.06</span><h3>${c.taxOffice}</h3><p class="muted">${c.internship}</p><div class="experience-symbol" aria-hidden="true">↗</div></div>
@@ -137,7 +141,7 @@ function setPaused(value) {
   paused = value; updateMotionButton(); journey?.setPaused(value); animatePage(); ScrollTrigger.refresh();
 }
 function showProject(id, opening = true) {
-  const allProjects = [...projects, ...recentProjects];
+  const allProjects = projects;
   const p = allProjects.find(p => p.id === id);
   if (!p) return;
   const t = p[lang], c = text[lang], s = sectionCopy[lang];
@@ -177,7 +181,7 @@ dialog.addEventListener('close', () => {
   if (modalOpener?.isConnected) modalOpener.focus({ preventScroll: true });
 });
 $('#language').onclick = () => {
-  const anchor = ['home', 'projects', ...projects.map(p => p.id), 'recent', ...recentProjects.map(p => p.id), 'experience', 'about'].map(id => {
+  const anchor = ['home', 'projects', ...projects.map(p => p.id), 'experience', 'about'].map(id => {
     const el = document.getElementById(id); return { id, offset: Math.abs(el.getBoundingClientRect().top), top: el.getBoundingClientRect().top };
   }).sort((a, b) => a.offset - b.offset)[0];
   animationContext?.revert();
@@ -195,9 +199,9 @@ renderPage();
 journey = createJourney({
   container: $('#stage'), reduced: paused,
   onStation(index, name) {
-    $('#scene-control').classList.toggle('on-left', index === 2 || index === 4);
+    $('#scene-control').classList.toggle('on-left', index > 0 && index % 2 === 0);
     $('#scene-control').classList.toggle('is-hero', index === 0);
-    $('#scene-name').textContent = name; $('#scene-number').textContent = '0' + index + ' / 04';
+    $('#scene-name').textContent = name; $('#scene-number').textContent = String(index).padStart(2, '0') + ' / 09';
     document.querySelectorAll('.journey-rail a').forEach((a, i) => {
       if (i === index) a.setAttribute('aria-current', 'step'); else a.removeAttribute('aria-current');
     });

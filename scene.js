@@ -1,14 +1,16 @@
 import * as THREE from 'three';
-import { frameworkLogos } from './brands.js';
+import { frameworkLogos, projectLogos } from './brands.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+import { addProjectScenes } from './new-scenes.js';
 
 const STATION_GAP = 19;
 const clamp = THREE.MathUtils.clamp;
 const mix = THREE.MathUtils.lerp;
 const smooth = t => t * t * (3 - 2 * t);
-const palettes = ['#e9e5ef', '#e4e9dc', '#e3dff0', '#dae7e5', '#eee4dc'];
-const stationNames = ['THE INTERSECTION', 'FIREFLY / FINTECH', 'ACGNTTS / OPEN SOURCE', 'CONNECTED ECOSYSTEM', 'A PLACE TO GROW'];
+const palettes = ['#e9e5ef', '#e4e9dc', '#e3dff0', '#dae7e5', '#eee4dc', '#eadce8', '#dce7eb', '#e4dfef', '#e5dced', '#dce7e7'];
+const stationNames = ['THE INTERSECTION', 'FIREFLY / FINTECH', 'ACGNTTS / OPEN SOURCE', 'CONNECTED ECOSYSTEM', 'A PLACE TO GROW', 'SOULBOT / MEMORY', 'FLOLUO / BUSINESS FLOW', 'PIANO ISLAND / PLAY', 'EMOTIONS / INNER STATE', 'PLUGINS / CONNECTIONS'];
 
 export function createJourney({ container, onStation, onStatus, reduced }) {
   let renderer;
@@ -83,6 +85,24 @@ export function createJourney({ container, onStation, onStatus, reduced }) {
     return mesh(new THREE.PlaneGeometry(...size), material, parent, position);
   };
 
+  const addLogo = (parent, id, position, size) => {
+    const brand = projectLogos.find(b => b.id === id);
+    const holder = new THREE.Group(); holder.position.set(...position); parent.add(holder);
+    const frame = box(holder, silver, [0, 0, -.06], [size + .12, size + .12, .09]);
+    const material = new THREE.MeshBasicMaterial({ transparent: true, toneMapped: false });
+    const icon = mesh(new THREE.PlaneGeometry(1, 1), material, holder, [0, 0, .005]);
+    new THREE.TextureLoader().load(brand.image, texture => {
+      texture.colorSpace = THREE.SRGBColorSpace;
+      texture.anisotropy = Math.min(renderer.capabilities.getMaxAnisotropy(), 4);
+      const aspect = texture.image.width / texture.image.height;
+      icon.scale.set(size * Math.min(aspect, 1), size * Math.min(1/aspect, 1), 1);
+      material.map = texture; material.needsUpdate = true;
+      if (paused) renderFrame(performance.now(), true);
+    });
+    frame.userData.brand = brand.name;
+    return holder;
+  };
+
   // Soft procedural contact shadows stay local to each sculpture.
   const shadowCanvas = document.createElement('canvas'); shadowCanvas.width = shadowCanvas.height = 128;
   const shadowContext = shadowCanvas.getContext('2d');
@@ -93,7 +113,7 @@ export function createJourney({ container, onStation, onStatus, reduced }) {
   const groups = [];
   const animations = [];
   const pedestals = [];
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < stationNames.length; i++) {
     const root = new THREE.Group(); root.position.z = -i * STATION_GAP;
     const sculpture = new THREE.Group(); root.add(sculpture);
     const pedestal = mesh(new THREE.CylinderGeometry(2.35, 2.35, .16, 96),
@@ -156,6 +176,7 @@ export function createJourney({ container, onStation, onStatus, reduced }) {
       const coin = mesh(new THREE.CylinderGeometry(.48, .48, .13, 64), i === 1 ? metal : green, rig, [2 - i * .25, .2 + i * .45, .3 - i * .55]);
       coin.rotation.set(Math.PI / 2, 0, -.25); coins.push(coin);
     }
+    addLogo(rig, 'firefly', [1.55, 1.6, .6], .9);
     label(rig, 'AI ↗', 'READ / ANALYZE', [-1.5, 1.55, .7], [1.15, .38], '#d7fb74', '#27232f');
     animations.push(t => {
       rig.position.y = Math.sin(t * .7) * .1; rig.rotation.y = -.35 + Math.sin(t * .22) * .15;
@@ -329,6 +350,8 @@ export function createJourney({ container, onStation, onStatus, reduced }) {
     });
   }
 
+  addProjectScenes({ groups, mesh, box, ball, ring, label, animations, addLogo, materials: { metal, silver, lavender, green, charcoal, cream } });
+
   // A sparse architectural dust field gives the travelling camera depth cues.
   let randomSeed = 74;
   const random = () => { randomSeed = (randomSeed * 16807) % 2147483647; return (randomSeed - 1) / 2147483646; };
@@ -336,7 +359,7 @@ export function createJourney({ container, onStation, onStatus, reduced }) {
   for (let i = 0; i < 220; i++) {
     dustPositions[i * 3] = (random() - .5) * 20;
     dustPositions[i * 3 + 1] = (random() - .4) * 11;
-    dustPositions[i * 3 + 2] = 5 - random() * 95;
+    dustPositions[i * 3 + 2] = 5 - random() * (stationNames.length * STATION_GAP);
   }
   const dustGeometry = new THREE.BufferGeometry();
   dustGeometry.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
@@ -344,7 +367,7 @@ export function createJourney({ container, onStation, onStatus, reduced }) {
   scene.add(dust);
 
   let sections = [], stops = [], mobile = innerWidth < 681;
-  const rotations = Array.from({ length: 5 }, () => new THREE.Vector2());
+  const rotations = Array.from({ length: stationNames.length }, () => new THREE.Vector2());
   let paused = reduced, scroll = scrollY, lastStation = -1, pulseAmount = 0;
   let lastTime = performance.now(), elapsed = 0, running = false;
   const pointer = new THREE.Vector2();
@@ -356,9 +379,9 @@ export function createJourney({ container, onStation, onStatus, reduced }) {
     stops = sections.map((el, i) => i === 0 ? 0 : el.offsetTop - innerHeight * .08);
     mobile = innerWidth < 681;
     groups.forEach(({ root, grid }, i) => {
-      root.position.x = mobile ? (i === 0 ? 1.15 : i === 3 ? 0 : .8) : (i === 2 || i === 4 ? -2.7 : 2.7);
-      root.position.y = mobile ? (i === 0 ? (innerWidth < 361 ? -2.3 : -2.0) : i === 3 ? 2.7 : 2.35) : .1;
-      root.scale.setScalar(mobile ? (i === 0 ? (innerWidth < 361 ? .5 : .56) : i === 3 ? .56 : .72) : 1);
+      root.position.x = mobile ? (i >= 5 ? 0 : i === 0 ? 1.15 : i === 3 ? 0 : .8) : (i > 0 && i % 2 === 0 ? -2.7 : 2.7);
+      root.position.y = mobile ? (i >= 5 ? 2.05 : i === 0 ? (innerWidth < 361 ? -2.3 : -2.0) : i === 3 ? 2.7 : 2.35) : .1;
+      root.scale.setScalar(mobile ? (i >= 5 ? .56 : i === 0 ? (innerWidth < 361 ? .5 : .56) : i === 3 ? .56 : .72) : 1);
       grid.visible = !mobile;
     });
     camera.aspect = innerWidth / innerHeight;
@@ -373,8 +396,8 @@ export function createJourney({ container, onStation, onStatus, reduced }) {
     for (let i = 0; i < stops.length - 1; i++) {
       if (y >= stops[i]) index = i;
     }
-    if (y >= stops.at(-1)) return { a: 4, b: 4, t: 0 };
-    const b = Math.min(index + 1, 4);
+    if (y >= stops.at(-1)) return { a: groups.length - 1, b: groups.length - 1, t: 0 };
+    const b = Math.min(index + 1, groups.length - 1);
     return { a: index, b, t: smooth(clamp((y - stops[index]) / (stops[b] - stops[index]), 0, 1)) };
   }
   function renderFrame(now, immediate = false) {
@@ -389,7 +412,9 @@ export function createJourney({ container, onStation, onStatus, reduced }) {
     const cameraZ = (mobile ? 11 : 10.6) - station * STATION_GAP;
     camera.position.set(Math.sin(station * Math.PI) * (mobile ? .1 : .65) + pointerSmoothed.x * .23, (mobile ? 1.9 : 1.1) + pointerSmoothed.y * .14, cameraZ);
     camera.lookAt(pointerSmoothed.x * .08, mobile ? .35 : .1, -station * STATION_GAP);
-    camera.rotation.z = paused ? 0 : Math.sin(station * Math.PI) * .035;
+    camera.rotation.z = paused ? 0 : Math.sin(station * Math.PI) * .05;
+    const fov = (mobile ? 45 : 39) + (paused ? 0 : Math.sin(t * Math.PI) * 4);
+    if (Math.abs(camera.fov - fov) > .01) { camera.fov = fov; camera.updateProjectionMatrix(); }
     targetColor.set(palettes[a]).lerp(new THREE.Color(palettes[b]), t);
     scene.background.copy(targetColor); scene.fog.color.copy(targetColor);
     key.position.z = cameraZ + 3; rim.position.z = cameraZ - 9;
@@ -400,11 +425,14 @@ export function createJourney({ container, onStation, onStatus, reduced }) {
       sculpture.rotation.x = rotations[i].y + (paused ? 0 : pointerSmoothed.y * .045);
       sculpture.rotation.z = paused ? 0 : pointerSmoothed.x * .055;
     });
-    animations.forEach(fn => fn(elapsed));
+    animations.forEach((fn, i) => { if (groups[i].root.visible) fn(elapsed); });
     pulseAmount *= .92;
     const current = groups[nearest]?.sculpture;
     if (current) current.scale.setScalar(1 + pulseAmount * .035);
     renderer.render(scene, camera);
+    renderer.domElement.dataset.station = String(nearest);
+    renderer.domElement.dataset.clock = elapsed.toFixed(3);
+    renderer.domElement.dataset.drawCalls = String(renderer.info.render.calls);
   }
   function tick(now) {
     if (paused || document.hidden) { running = false; return; }
@@ -438,7 +466,7 @@ export function createJourney({ container, onStation, onStatus, reduced }) {
       onStatus(paused ? 'WEBGL / STILL' : 'WEBGL / LIVE');
       if (paused) renderFrame(performance.now(), true); else start();
     },
-    pulse() { pulseAmount = 1; },
+    pulse() { pulseAmount = 1; if (paused) renderFrame(performance.now(), true); },
     rotate(dx, dy) {
       const rotation = rotations[Math.max(0, lastStation)];
       rotation.x += dx; rotation.y = clamp(rotation.y + dy, -.6, .6);
