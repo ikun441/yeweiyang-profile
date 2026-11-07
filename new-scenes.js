@@ -56,7 +56,7 @@ export function addProjectScenes({ groups, mesh, box, ball, ring, label, animati
     const logo=addLogo(g,'erp',[0,1.85,.5],1.2);
     label(g,'DRAFT → APPROVE','PURCHASE / STOCK / SALES',[0,-1.65,1.2],[2.7,.6],'#345564','#e7eff1');
     animations.push(t=>{
-      parcels.forEach((parcel,i)=>{parcel.position.copy(loop.getPointAt((t*.06+i/7)%1));parcel.position.y+=.22; const v=loop.getTangentAt((t*.06+i/7)%1);parcel.rotation.y=Math.atan2(v.x,v.z);});
+      parcels.forEach((parcel,i)=>{parcel.position.copy(loop.getPointAt(((t*.06+i/7)%1+1)%1));parcel.position.y+=.22; const v=loop.getTangentAt(((t*.06+i/7)%1+1)%1);parcel.rotation.y=Math.atan2(v.x,v.z);});
       scan.position.y=Math.sin(t*2.2)*.6;logo.position.y=1.85+Math.sin(t*.8)*.06;rig.rotation.y=-.28+Math.sin(t*.2)*.09;
     });
   }

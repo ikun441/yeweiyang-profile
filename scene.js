@@ -401,7 +401,7 @@ export function createJourney({ container, onStation, onStatus, reduced }) {
     return { a: index, b, t: smooth(clamp((y - stops[index]) / (stops[b] - stops[index]), 0, 1)) };
   }
   function renderFrame(now, immediate = false) {
-    const delta = Math.min((now - lastTime) / 1000, .05); lastTime = now;
+    const delta = clamp((now - lastTime) / 1000, 0, .05); lastTime = now;
     if (!paused) elapsed += delta;
     scroll = immediate || paused ? scrollY : mix(scroll, scrollY, 1 - Math.exp(-delta * 8));
     const { a, b, t } = readPosition(scroll);
